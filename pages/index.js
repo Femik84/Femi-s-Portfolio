@@ -25,7 +25,7 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h1"
+            className="h1 xl:text-[40px] "
           >
             Transforming Ideas <br /> Into{" "}
             <span className="text-accent ">Digital Reality</span>
@@ -55,7 +55,7 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="hidden xl:flex"
+            className="hidden  xl:flex"
           >
             <ProjectsBtn />
           </motion.div>

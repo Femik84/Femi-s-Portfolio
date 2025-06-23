@@ -65,21 +65,21 @@ const About = () => {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="h-full bg-primary/30 py-32 text-center xl:text-left">
+    <div className="h-full  bg-primary/30 py-32 text-center xl:text-left">
       <Circles />
 
       <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6">
         {/* text */}
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1  flex flex-col justify-center">
           <motion.h2
             variants={fadeIn("right", 0.2)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2"
+            className="h2 text-[28px]"
           >
-            Captivating <span className="text-accent">stories</span> birth
-            magnificient designs.
+            Captivating <span className="text-accent">stories birth</span><br />
+            magnificient <span className="text-accent">designs.</span>
           </motion.h2>
           <motion.p
             variants={fadeIn("right", 0.4)}
@@ -135,6 +135,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+        
 
         {/* info */}
         <motion.div
@@ -151,7 +152,7 @@ const About = () => {
                 className={`${
                   index === itemIndex &&
                   "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                } cursor-pointer capitalize xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
+                } cursor-pointer capitalize xl:text-lg xl:text-center relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
                 onClick={() => setIndex(itemIndex)}
               >
                 {item.title}

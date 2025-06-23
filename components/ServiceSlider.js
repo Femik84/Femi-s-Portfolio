@@ -13,7 +13,7 @@ const serviceData = [
   {
     icon: <RxCrop />,
     title: "Branding",
-    description: "I craft bold brand identities that tell stories, build trust, evoke emotion, and leave lasting impressions across visuals, voice, and strategy.",
+    description: "I craft bold brand identities that tell stories, build trust, and leave lasting impressions across visuals, voice, and strategy.",
   },
   {
     icon: <RxPencil2 />,
@@ -23,12 +23,12 @@ const serviceData = [
   {
     icon: <RxDesktop />,
     title: "Development",
-    description: "I develop fast, scalable, and secure web applications with clean architecture, modern frameworks, and seamless user experiences tailored for performance and growth.",
+    description: "I develop fast and scalable web applications with clean architecture and modern frameworks tailored for performance and growth.",
   },
   {
     icon: <RxReader />,
     title: "Copywriting",
-    description: "I write clear, compelling, and persuasive copy that connects emotionally, drives action, boosts engagement, and aligns perfectly with your brand’s voice.",
+    description: "I write clear, compelling, and persuasive copy that connects emotionally, drives action,  and aligns perfectly with your brand’s voice.",
   },
   {
     icon: <RxRocket />,
