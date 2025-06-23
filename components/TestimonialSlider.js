@@ -11,14 +11,14 @@ const testimonialData = [
     name: "Jane Doe",
     position: "Customer",
     message:
-      "He delivered beyond expectations. Communication was clear and the project was completed ahead of schedule. Highly recommended.",
+      "He delivered beyond expectations. Communication was clear and the project was completed ahead of schedule. ",
   },
   {
     image: "/t-avt-3.png",
     name: "Jhon Doe",
     position: "Customer",
     message:
-      "Working with him was great. He understood our vision quickly and turned it into a stunning, functional product. Truly exceptional talent.",
+      "Working with him was great. He understood our vision quickly and turned it into a functional product. Truly exceptional talent.",
   },
 ];
 
@@ -75,7 +75,7 @@ const TestimonialSlider = () => {
                   <FaQuoteLeft className="text-4xl xl:text-6xl text-white/20 mx-auto md:mx-0 " />
                 </div>
                 {/* message */}
-                <div className="xl:text-lg text-center md:text-left ">
+                <div className="xl:text-lg text-[14px] text-center md:text-left ">
                   {person.message}
                 </div>
               </div>

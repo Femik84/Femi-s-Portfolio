@@ -14,6 +14,7 @@ const Contact = () => {
 
   const [status, setStatus] = useState("");
   const [buttonText, setButtonText] = useState("Let's talk");
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,13 +22,14 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSending(true);
     setButtonText("Sending...");
 
     const payload = {
-      firstName: formData.name, // maps to backend
-      lastName: "", // optional
+      firstName: formData.name,
+      lastName: "",
       email: formData.email,
-      phone: "", // optional
+      phone: "",
       message: `${formData.subject}\n\n${formData.message}`,
     };
 
@@ -43,17 +45,22 @@ const Contact = () => {
 
       if (res.ok) {
         setStatus("Message sent successfully!");
+        setButtonText("Message sent!");
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus("Something went wrong. Please try again.");
+        setButtonText("Let's talk");
       }
     } catch (err) {
       setStatus("Network error. Please try again later.");
+      setButtonText("Let's talk");
     }
+    setIsSending(false);
 
-    setButtonText("Let's talk");
-
-    setTimeout(() => setStatus(""), 5000);
+    setTimeout(() => {
+      setStatus("");
+      setButtonText("Let's talk");
+    }, 5000);
   };
 
   return (
@@ -87,6 +94,7 @@ const Contact = () => {
                 placeholder="Name"
                 className="input"
                 required
+                disabled={isSending}
               />
               <input
                 type="email"
@@ -96,6 +104,7 @@ const Contact = () => {
                 placeholder="Email"
                 className="input"
                 required
+                disabled={isSending}
               />
             </div>
 
@@ -107,6 +116,7 @@ const Contact = () => {
               placeholder="Subject"
               className="input"
               required
+              disabled={isSending}
             />
 
             <textarea
@@ -116,19 +126,40 @@ const Contact = () => {
               placeholder="Message"
               className="textarea"
               required
+              disabled={isSending}
             ></textarea>
 
             <button
               type="submit"
-              className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
+              className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative"
+              disabled={isSending || buttonText === "Message sent!"}
             >
-              <span className="group-hover:translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
+              <span
+                className={
+                  (isSending || buttonText === "Message sent!")
+                    ? "transition-all duration-500"
+                    : "group-hover:translate-y-[120%] group-hover:opacity-0 transition-all duration-500"
+                }
+              >
                 {buttonText}
               </span>
-              <BsArrowRight className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]" />
+              {/* Only show arrow if NOT sending and NOT sent */}
+              {!(isSending || buttonText === "Message sent!") && (
+                <BsArrowRight className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]" />
+              )}
             </button>
 
-            {status && <p className="text-white text-sm mt-2">{status}</p>}
+            {status && (
+              <p
+                className={`text-sm mt-2 ${
+                  status === "Message sent successfully!"
+                    ? "text-green-400"
+                    : "text-red-400"
+                }`}
+              >
+                {status}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>

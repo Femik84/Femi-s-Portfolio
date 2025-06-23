@@ -76,7 +76,7 @@ const About = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2 text-[28px]"
+            className="h2 sm:text-[28px] text-[23px]"
           >
             Captivating <span className="text-accent">stories birth</span><br />
             magnificient <span className="text-accent">designs.</span>
@@ -86,7 +86,7 @@ const About = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-[500px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0"
+            className="max-w-[500px] sm:text-[17px] text-[12px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0"
           >
             I build responsive interfaces with HTML, CSS, JavaScript, React,
             Next.js, and Figma. On the backend, I develop scalable systems using
