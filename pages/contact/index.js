@@ -24,19 +24,22 @@ const Contact = () => {
     setButtonText("Sending...");
 
     const payload = {
-      firstName: formData.name,  // maps to backend
-      lastName: "",              // optional
+      firstName: formData.name, // maps to backend
+      lastName: "", // optional
       email: formData.email,
-      phone: "",                 // optional
+      phone: "", // optional
       message: `${formData.subject}\n\n${formData.message}`,
     };
 
     try {
-      const res = await fetch("https://porfolio-server-jokt.onrender.com/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "https://porfolio-server-jokt.onrender.com/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (res.ok) {
         setStatus("Message sent successfully!");
@@ -64,7 +67,7 @@ const Contact = () => {
             exit="hidden"
             className="h2 text-center mb-12"
           >
-            Let's <span className="text-accent">connect.</span>
+            Let&apos;s <span className="text-accent">connect.</span>
           </motion.h2>
 
           <motion.form
