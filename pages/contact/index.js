@@ -72,7 +72,7 @@ const Contact = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2 text-center mb-12"
+            className="h2 text-[28px] text-center mb-12"
           >
             Let&apos;s <span className="text-accent">connect.</span>
           </motion.h2>
@@ -120,14 +120,14 @@ const Contact = () => {
             />
 
             <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Message"
-              className="textarea"
-              required
-              disabled={isSending}
-            ></textarea>
+  name="message"
+  value={formData.message}
+  onChange={handleChange}
+  placeholder="Message"
+  className="textarea  h-32  text-sm"
+  required
+  disabled={isSending}
+/>
 
             <button
               type="submit"
