@@ -18,17 +18,17 @@ const Home = () => {
     <div className="bg-primary/60 h-full ">
       {/* text */}
       <div className="w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10">
-        <div className="text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full container mx-auto ">
+        <div className="text-center flex flex-col justify-center xl:pt-40 pt-16 mt-30 xl:text-left h-full container mx-auto ">
           {/* title */}
           <motion.h1
             variants={fadeIn("down", 0.2)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h1 xl:text-[40px] "
+            className="h1 sm:text-[28px] text-[28px] xl:text-[40px] mb-6 xl:mb-0"
           >
             Transforming Ideas <br /> Into{" "}
-            <span className="text-accent ">Digital Reality</span>
+            <span className="text-accent">Digital Reality</span>
           </motion.h1>
           {/* subtitle */}
 
@@ -37,11 +37,11 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16 "
+            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16 sm:text-[17px] text-[14px] mt-0 xl:mt-6"
           >
-            I&apos;m a passionate full-stack developer who builds dynamic,
-            user-friendly websites from start to finish, turning ideas into
-            seamless digital experiences.
+            I&apos;m a passionate full-stack developer who builds dynamic web apps
+            and mobile apps from start to finish, turning ideas into seamless
+            digital experiences.
           </motion.p>
 
           {/* buttons */}
@@ -55,7 +55,7 @@ const Home = () => {
                 exit="hidden"
                 href="/your-cv.pdf"
                 download
-                className="relative btn rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent/5 backdrop-blur-sm w-[180px] h-[50px] bottom-4 px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent hover:shadow-lg hover:shadow-accent/50 group"
+                className="relative btn rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent/5 backdrop-blur-sm w-[180px] h-[50px] bottom-3 px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent hover:shadow-lg hover:shadow-accent/50 group"
               >
                 <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500 font-semibold text-white flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
