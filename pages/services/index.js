@@ -95,26 +95,27 @@ const ServiceSlider = () => {
       freeMode={true}
       pagination={{ clickable: true }}
       modules={[FreeMode, Pagination]}
-      className="h-[260px] sm:h-[380px] pb-12"
+      className="h-[310px] sm:h-[440px]"
       style={{
         '--swiper-pagination-bottom': '0px',
         '--swiper-pagination-color': '#f13024',
+        paddingBottom: '25px',
       }}
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-[rgba(65,47,123,0.15)] h-[220px] sm:h-72 rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
+          <div className="bg-[rgba(65,47,123,0.15)] h-[280px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
             {/* icon */}
-            <div className="text-3xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
+            <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
 
             {/* title & description */}
             <div className="mb-3 sm:mb-4 flex-1">
-              <h3 className="text-base sm:text-lg mb-1.5 sm:mb-2 font-semibold">{item.title}</h3>
-              <p className="text-xs sm:text-sm leading-relaxed text-white/80">{item.description}</p>
+              <h3 className="text-lg sm:text-lg mb-1.5 sm:mb-2 font-semibold">{item.title}</h3>
+              <p className="text-sm sm:text-sm leading-relaxed text-white/80">{item.description}</p>
             </div>
 
             {/* arrow */}
-            <div className="text-2xl sm:text-3xl shrink-0">
+            <div className="text-3xl sm:text-3xl shrink-0">
               <RxArrowTopRight className="group-hover:rotate-45 group-hover:text-accent transition-all duration-300" />
             </div>
           </div>
@@ -131,7 +132,7 @@ const Bulb = () => <div className="fixed bottom-10 left-10 w-20 h-20 opacity-30 
 // Main Services Component
 const Services = () => {
   return (
-    <div className="h-full bg-primary/30 py-24 sm:py-36 flex items-center">
+    <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center">
       <Circles />
       <div className="container mx-auto px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
@@ -151,7 +152,7 @@ const Services = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="text-sm sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
+              className="text-base sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
             >
               Full-stack development services specializing in web and mobile applications, from sleek landing pages to scalable backends built with Python and Django.
             </motion.p>
