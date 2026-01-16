@@ -104,7 +104,7 @@ const ServiceSlider = () => {
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-[rgba(65,47,123,0.15)] h-[280px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
+          <div className="bg-[rgba(65,47,123,0.15)] h-[260px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
             {/* icon */}
             <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
 
@@ -121,6 +121,13 @@ const ServiceSlider = () => {
           </div>
         </SwiperSlide>
       ))}
+      <style jsx>{`
+        @media (max-width: 639px) {
+          :global(.swiper-pagination) {
+            bottom: 10px !important;
+          }
+        }
+      `}</style>
     </Swiper>
   );
 };
