@@ -36,6 +36,16 @@ const fadeIn = (direction, delay) => {
         ease: [0.25, 0.25, 0.25, 0.75],
       },
     },
+    exit: {
+      y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
+      x: direction === 'left' ? 40 : direction === 'right' ? -40 : 0,
+      opacity: 0,
+      transition: {
+        type: 'tween',
+        duration: 1.2,
+        ease: [0.25, 0.25, 0.25, 0.75],
+      },
+    },
   };
 };
 
@@ -104,7 +114,7 @@ const ServiceSlider = () => {
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-[rgba(65,47,123,0.15)] h-[260px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
+          <div className="bg-[rgba(65,47,123,0.15)] h-[257px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
             {/* icon */}
             <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
 
@@ -144,21 +154,21 @@ const Services = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
           {/* Text */}
-          <div className="text-center flex xl:w-[30vw] flex-col lg:text-left mb-8 xl:mb-0">
+          <div className="text-center flex xl:w-[30vw] relative top-3 flex-col lg:text-left mb-8 xl:mb-0">
             <motion.h2
               variants={fadeIn('up', 0.3)}
               initial="hidden"
               animate="show"
-              exit="hidden"
+              exit="exit"
               className="text-3xl sm:text-4xl xl:text-5xl font-bold xl:mt-8 mb-3 sm:mb-4"
             >
-              My Services<span className="text-accent">.</span>
+              My <span className="text-accent">Services</span><span className="text-accent">.</span>
             </motion.h2>
             <motion.p
               variants={fadeIn('up', 0.4)}
               initial="hidden"
               animate="show"
-              exit="hidden"
+              exit="exit"
               className="text-base sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
             >
               Full-stack development services specializing in web and mobile applications, from sleek landing pages to scalable backends built with Python and Django.
@@ -169,7 +179,7 @@ const Services = () => {
             variants={fadeIn('down', 0.6)}
             initial="hidden"
             animate="show"
-            exit="hidden"
+            exit="exit"
             className="w-full xl:max-w-[65%] xl:pr-8"
           >
             {/* slider */}
