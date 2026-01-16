@@ -243,11 +243,16 @@ const About = () => {
           </div>
 
           <div className="py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center xl:items-start">
-            {/* Frontend/Backend Switch */}
-            <div className="flex gap-x-3 mb-2">
+            {/* Frontend/Backend Switch - Fixed with better structure */}
+            <div className="flex gap-x-3 mb-2 relative z-20">
               <button
-                onClick={() => handleTabChange(0)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleTabChange(0);
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer select-none ${
                   skillTab === 0
                     ? "bg-accent text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10"
@@ -256,8 +261,13 @@ const About = () => {
                 Frontend
               </button>
               <button
-                onClick={() => handleTabChange(1)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleTabChange(1);
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer select-none ${
                   skillTab === 1
                     ? "bg-accent text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10"
@@ -268,7 +278,7 @@ const About = () => {
             </div>
 
             {/* Skills Display */}
-            <div className="w-full relative">
+            <div className="w-full relative z-10">
               <div className="hidden sm:block font-light mb-3 text-white/80 text-sm">
                 {aboutData[index].info[skillTab].title}
               </div>

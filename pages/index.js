@@ -141,7 +141,7 @@ const Home = () => {
               <a
                 href="/your-cv.pdf"
                 download
-                className="relative btn rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent/5 backdrop-blur-sm w-[180px] h-[50px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent hover:shadow-lg hover:shadow-accent/50 group"
+                className="relative bottom-2 btn rounded-full border-2 border-accent/50 bg-gradient-to-r from-accent/10 to-accent/5 backdrop-blur-sm w-[180px] h-[50px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent hover:shadow-lg hover:shadow-accent/50 group"
               >
                 <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500 font-semibold text-white flex items-center gap-2">
                   <svg
