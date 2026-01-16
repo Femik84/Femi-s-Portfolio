@@ -1,16 +1,26 @@
 // icons
 import {
-  HiHome,
   HiUser,
   HiViewColumns,
   HiRectangleGroup,
   HiChatBubbleBottomCenterText,
   HiEnvelope,
 } from "react-icons/hi2";
+import { Home } from "lucide-react";
+
+// next link
+import Link from "next/link";
+
+//next router
+import { useRouter } from "next/router";
 
 // nav data
 export const navData = [
-  { name: "home", path: "/", icon: <HiHome /> },
+  { 
+    name: "home", 
+    path: "/", 
+    icon: <Home className="w-6.5 h-6.5 lg:w-5 lg:h-5" fill="currentColor" /> 
+  },
   { name: "about", path: "/about", icon: <HiUser /> },
   { name: "services", path: "/services", icon: <HiRectangleGroup /> },
   { name: "work", path: "/work", icon: <HiViewColumns /> },
@@ -25,12 +35,6 @@ export const navData = [
     icon: <HiEnvelope />,
   },
 ];
-
-// next link
-import Link from "next/link";
-
-//next router
-import { useRouter } from "next/router";
 
 const Nav = () => {
   const router = useRouter();
@@ -54,7 +58,6 @@ const Nav = () => {
                   <div className="text-[12px] leading-none font-semibold capitalize">
                     {link.name}
                   </div>
-
 
                   {/* triangle */}
                    <div className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2 "> </div>

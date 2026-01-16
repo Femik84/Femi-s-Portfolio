@@ -1,76 +1,158 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import CountUp from "react-countup";
 
-// icons
+// Icons
 import {
   FaHtml5,
   FaCss3,
   FaJs,
   FaReact,
-  FaWordpress,
+  FaPython,
+  FaNodeJs,
   FaFigma,
+  FaDatabase,
 } from "react-icons/fa";
 
 import {
   SiNextdotjs,
-  SiFramer,
-  SiAdobexd,
-  SiAdobephotoshop,
+  SiDjango,
+  SiTailwindcss,
+  SiPostgresql,
+  SiMongodb,
+  SiExpress,
 } from "react-icons/si";
 
-//  data
+import { TbBrandReactNative } from "react-icons/tb";
+
+// Placeholder components
+const Circles = () => <div className="fixed bottom-0 right-0 w-64 h-64 opacity-20 bg-gradient-to-br from-accent/20 to-transparent rounded-full blur-3xl"></div>;
+
+const fadeIn = (direction, delay) => ({
+  hidden: {
+    y: direction === "up" ? 40 : direction === "down" ? -40 : 0,
+    x: direction === "left" ? 40 : direction === "right" ? -40 : 0,
+    opacity: 0,
+  },
+  show: {
+    y: 0,
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "tween",
+      duration: 0.8,
+      delay: delay,
+      ease: [0.25, 0.25, 0.25, 0.75],
+    },
+  },
+});
+
+// Updated data structure
 const aboutData = [
   {
     title: "skills",
     info: [
       {
-        title: "Fullstack Development",
+        title: "Frontend Development",
         icons: [
-          <FaHtml5 key="html5" />,
-          <FaCss3 key="css3" />,
-          <FaReact key="react" />,
-          <SiNextdotjs key="nextjs" />,
-          <SiFramer key="framer" />,
-          <SiAdobephotoshop key="photoshop" />,
-          <SiAdobexd key="adobexd" />,
-          <FaFigma key="figma" />,
+          { icon: <FaHtml5 />, name: "HTML5" },
+          { icon: <FaCss3 />, name: "CSS3" },
+          { icon: <FaJs />, name: "JavaScript" },
+          { icon: <FaReact />, name: "React" },
+          { icon: <TbBrandReactNative />, name: "React Native" },
+          { icon: <SiNextdotjs />, name: "Next.js" },
+          { icon: <SiTailwindcss />, name: "Tailwind" },
+          { icon: <FaFigma />, name: "Figma" },
         ],
       },
       {
-        title: "Frontend Designs",
+        title: "Backend Development",
         icons: [
-          <FaFigma key="figma2" />,
-          <SiFramer key="framer2" />,
-          <FaHtml5 key="html5-2" />,
-          <FaCss3 key="css3-2" />,
-          <FaReact key="react2" />,
-          <SiNextdotjs key="nextjs2" />,
-          <SiAdobexd key="adobexd2" />,
+          { icon: <FaPython />, name: "Python" },
+          { icon: <SiDjango />, name: "Django" },
+          { icon: <FaNodeJs />, name: "Node.js" },
+          { icon: <SiExpress />, name: "Express" },
+          { icon: <SiPostgresql />, name: "PostgreSQL" },
+          { icon: <SiMongodb />, name: "MongoDB" },
+          { icon: <FaDatabase />, name: "REST API" },
         ],
       },
     ],
   },
 ];
 
-import Avatar from "../../components/Avatar";
-import Circles from "../../components/Circles";
-
-//framer motion
-import { motion } from "framer-motion";
-import { fadeIn } from "../../variants";
-
-//counter
-import CountUp from "react-countup";
-
 const About = () => {
   const [index, setIndex] = useState(0);
+  const [skillTab, setSkillTab] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const scrollContainerRef = useRef(null);
+  const autoScrollIntervalRef = useRef(null);
+  const scrollPositionRef = useRef(0);
+
+  // Auto-scroll functionality with smooth loop
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || !isAutoScrolling) return;
+
+    const startAutoScroll = () => {
+      autoScrollIntervalRef.current = setInterval(() => {
+        if (container) {
+          const maxScroll = container.scrollWidth - container.clientWidth;
+          
+          // Increment the scroll position
+          scrollPositionRef.current += 2;
+          
+          // Smooth reset when reaching the end
+          if (scrollPositionRef.current >= maxScroll) {
+            scrollPositionRef.current = 0;
+          }
+          
+          container.scrollLeft = scrollPositionRef.current;
+        }
+      }, 20);
+    };
+
+    // Reset scroll position when tab changes
+    scrollPositionRef.current = 0;
+    if (container) {
+      container.scrollLeft = 0;
+    }
+
+    startAutoScroll();
+
+    return () => {
+      if (autoScrollIntervalRef.current) {
+        clearInterval(autoScrollIntervalRef.current);
+      }
+    };
+  }, [isAutoScrolling, skillTab]);
+
+  // Stop auto-scroll on user interaction
+  const handleUserInteraction = () => {
+    setIsAutoScrolling(false);
+    if (autoScrollIntervalRef.current) {
+      clearInterval(autoScrollIntervalRef.current);
+    }
+    // Update the ref to current scroll position when user takes control
+    if (scrollContainerRef.current) {
+      scrollPositionRef.current = scrollContainerRef.current.scrollLeft;
+    }
+  };
+
+  // Reset auto-scroll when changing tabs
+  const handleTabChange = (newTab) => {
+    setSkillTab(newTab);
+    setIsAutoScrolling(true);
+    scrollPositionRef.current = 0;
+  };
 
   return (
-    <div className="h-full  bg-primary/30 py-32 text-center xl:text-left">
+    <div className="h-full bg-primary/30 py-12 sm:py-32 text-center xl:text-left">
       <Circles />
 
-      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6">
+      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6 pt-24 sm:pt-0">
         {/* text */}
-        <div className="flex-1  flex flex-col justify-center">
+        <div className="flex-1 flex flex-col justify-center">
           <motion.h2
             variants={fadeIn("right", 0.2)}
             initial="hidden"
@@ -78,8 +160,9 @@ const About = () => {
             exit="hidden"
             className="h2 sm:text-[28px] text-[24px]"
           >
-            Captivating <span className="text-accent">stories birth</span><br />
-            magnificient <span className="text-accent">designs.</span>
+            Captivating <span className="text-accent">stories birth</span>
+            <br />
+            magnificent <span className="text-accent">designs.</span>
           </motion.h2>
           <motion.p
             variants={fadeIn("right", 0.4)}
@@ -89,9 +172,9 @@ const About = () => {
             className="max-w-[500px] sm:text-[17px] text-[14px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0"
           >
             I build responsive interfaces with HTML, CSS, JavaScript, React,
-            Next.js, and Figma. On the backend, I develop scalable systems using
-            Python, Django, Node.js, REST APIs, and PostgreSQL to deliver
-            full-stack web applications with strong performance.
+            React Native, Next.js, and Tailwind CSS. On the backend, I develop scalable
+            systems using Python, Django, Node.js, REST APIs, and PostgreSQL to
+            deliver full-stack web applications with strong performance.
           </motion.p>
 
           {/* counters */}
@@ -135,7 +218,6 @@ const About = () => {
             </div>
           </motion.div>
         </div>
-        
 
         {/* info */}
         <motion.div
@@ -152,7 +234,7 @@ const About = () => {
                 className={`${
                   index === itemIndex &&
                   "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                } cursor-pointer capitalize xl:text-lg xl:text-center relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
+                } cursor-pointer capitalize xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
                 onClick={() => setIndex(itemIndex)}
               >
                 {item.title}
@@ -161,28 +243,94 @@ const About = () => {
           </div>
 
           <div className="py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center xl:items-start">
-            {aboutData[index].info.map((item, infoIndex) => (
-              <div
-                key={infoIndex}
-                className="flex-1 flex flex-col md:flex-row max-w-max gap-x-2 items-center text-white/60 mb-2"
+            {/* Frontend/Backend Switch */}
+            <div className="flex gap-x-3 mb-2">
+              <button
+                onClick={() => handleTabChange(0)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  skillTab === 0
+                    ? "bg-accent text-white"
+                    : "bg-white/5 text-white/60 hover:bg-white/10"
+                }`}
               >
-                <div className="font-light mb-2 md:mb-0">{item.title}</div>
-                <div className="hidden md:flex">-</div>
-                <div>{item.stage}</div>
+                Frontend
+              </button>
+              <button
+                onClick={() => handleTabChange(1)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  skillTab === 1
+                    ? "bg-accent text-white"
+                    : "bg-white/5 text-white/60 hover:bg-white/10"
+                }`}
+              >
+                Backend
+              </button>
+            </div>
 
-                {/* icons */}
-                <div className="flex gap-x-4">
-                  {item.icons?.map((icon, iconIndex) => (
-                    <div key={iconIndex} className="text-2xl text-white">
-                      {icon}
-                    </div>
-                  ))}
-                </div>
+            {/* Skills Display */}
+            <div className="w-full relative">
+              <div className="hidden sm:block font-light mb-3 text-white/80 text-sm">
+                {aboutData[index].info[skillTab].title}
               </div>
-            ))}
+
+              {/* Icons Grid with Horizontal Scroll */}
+              <div className="relative group">
+                {/* Gradient Overlays for Scroll Indication */}
+                <div className="sm:hidden absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-primary/90 to-transparent z-10 pointer-events-none" />
+                <div className="sm:hidden absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-primary/90 to-transparent z-10 pointer-events-none" />
+                
+                {/* Scrollable Container */}
+                <div 
+                  ref={scrollContainerRef}
+                  className="overflow-x-auto scrollbar-hide pb-2 sm:pr-6"
+                  style={{ scrollBehavior: 'auto' }}
+                  onTouchStart={handleUserInteraction}
+                  onMouseDown={handleUserInteraction}
+                  onWheel={handleUserInteraction}
+                >
+                  <div className="grid grid-flow-col auto-cols-[calc(25%-9px)] sm:grid-flow-row sm:grid-cols-4 gap-3 sm:gap-4 min-w-min sm:min-w-0">
+                    {aboutData[index].info[skillTab].icons?.map((iconData, iconIndex) => (
+                      <motion.div
+                        key={iconIndex}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: iconIndex * 0.05 }}
+                        className="flex flex-col items-center justify-center p-3 bg-white/5 hover:bg-accent/10 rounded-lg transition-all duration-300 hover:scale-105 border border-white/5 hover:border-accent/30 min-w-[70px] sm:min-w-0"
+                      >
+                        <div className="text-2xl sm:text-3xl text-white hover:text-accent transition-colors duration-300 mb-1">
+                          {iconData.icon}
+                        </div>
+                        <span className="text-[9px] sm:text-[10px] text-white/60 text-center font-medium whitespace-nowrap">
+                          {iconData.name}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Scroll Hint (visible only on mobile) */}
+                {isAutoScrolling && (
+                  <div className="sm:hidden text-center mt-2">
+                    <span className="text-[10px] text-white/40 animate-pulse">
+                      Touch to pause auto-scroll
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };

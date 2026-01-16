@@ -11,12 +11,12 @@ const ProjectsBtn2 = () => {
     <div className="mx-auto xl:mx-0">
       <Link
         href="/work"
-        className="relative w-[185px] h-[185px] flex justify-center items-center z-10 pointer-events-auto"
+        className="relative w-[185px] bottom-8 h-[185px] flex justify-center items-center z-10 pointer-events-auto"
       >
         <Image
           src="/rounded-text.png"
-          width={141}
-          height={148}
+          width={121}
+          height={128}
           alt=""
           className="animate-spin-slow"
         />

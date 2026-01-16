@@ -72,7 +72,7 @@ const Contact = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2 text-[28px] text-center mb-12"
+            className="h2 text-[34px] text-center mb-8"
           >
             Let&apos;s <span className="text-accent">connect.</span>
           </motion.h2>
@@ -131,7 +131,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative"
+              className="btn rounded-full border border-white/50 max-w-[130px] px-4 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative"
               disabled={isSending || buttonText === "Message sent!"}
             >
               <span
