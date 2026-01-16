@@ -8,34 +8,7 @@ import {
   RxArrowTopRight,
 } from "react-icons/rx";
 
-// data
-const serviceData = [
-  {
-    icon: <RxCrop />,
-    title: "Branding",
-    description: "I craft bold brand identities that tell stories, build trust, and leave lasting impressions across visuals, voice, and strategy.",
-  },
-  {
-    icon: <RxPencil2 />,
-    title: "Design",
-    description:"I design intuitive, sleek interfaces that blend aesthetics with function, ensuring every user interaction feels seamless, modern, and purpose-driven.",
-  },
-  {
-    icon: <RxDesktop />,
-    title: "Development",
-    description: "I develop fast and scalable web applications with clean architecture and modern frameworks tailored for performance and growth.",
-  },
-  {
-    icon: <RxReader />,
-    title: "Copywriting",
-    description: "I write clear, compelling, and persuasive copy that connects emotionally, drives action,  and aligns perfectly with your brand’s voice.",
-  },
-  {
-    icon: <RxRocket />,
-    title: "SEO",
-    description: "I optimize content with smart keywords, metadata, and structure to boost visibility, rank higher, and drive organic traffic effortlessly.",
-  },
-];
+
 
 // Import Swiper components (✅ Correct)
 import { Swiper, SwiperSlide } from "swiper/react";
