@@ -1,7 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronDown, X } from 'lucide-react';
-import portfolioData from '../../components/portfolioData';
+
+/* Sample Portfolio Data */
+const portfolioData = {
+  web: [
+    {
+      id: 1,
+      name: 'E-Commerce Platform',
+      description: 'A modern online shopping experience with seamless checkout',
+      fullDescription: 'A fully responsive e-commerce platform built with React and Node.js, featuring real-time inventory management, secure payment processing, and an intuitive user interface that drives conversions.',
+      image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
+      liveUrl: '#'
+    },
+    {
+      id: 2,
+      name: 'Portfolio Dashboard',
+      description: 'Analytics dashboard for tracking portfolio performance',
+      fullDescription: 'An interactive analytics dashboard that provides real-time insights into portfolio performance, featuring customizable widgets, data visualizations, and comprehensive reporting tools.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+      liveUrl: '#'
+    },
+    {
+      id: 3,
+      name: 'Social Media App',
+      description: 'Connect and share with friends in real-time',
+      fullDescription: 'A modern social networking platform with real-time messaging, media sharing, and community features designed to foster meaningful connections.',
+      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80',
+      liveUrl: '#'
+    }
+  ],
+  mobile: [
+    {
+      id: 1,
+      name: 'Fitness Tracker',
+      description: 'Track workouts and achieve your fitness goals',
+      fullDescription: 'A comprehensive fitness tracking application that helps users monitor their workouts, set goals, and track progress with detailed analytics and personalized recommendations.',
+      image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80',
+      apkUrl: '#',
+      playStoreUrl: '#'
+    },
+    {
+      id: 2,
+      name: 'Recipe Manager',
+      description: 'Organize and discover delicious recipes',
+      fullDescription: 'An intuitive recipe management app that allows users to save favorite recipes, create shopping lists, and discover new culinary inspirations with smart categorization.',
+      image: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&q=80',
+      apkUrl: '#',
+      playStoreUrl: '#'
+    },
+    {
+      id: 3,
+      name: 'Budget Planner',
+      description: 'Manage your finances with ease',
+      fullDescription: 'A powerful budgeting tool that helps users track expenses, set financial goals, and gain insights into spending patterns with visual reports and alerts.',
+      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
+      apkUrl: '#',
+      playStoreUrl: '#'
+    }
+  ]
+};
 
 /* Decorative Bulb */
 const Bulb = () => (
@@ -89,11 +147,11 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
               <X size={24} />
             </motion.button>
 
-            <div className="overflow-y-auto max-h-[90vh] p-6 md:p-8 scrollbar-hide">
+            <div className="overflow-y-auto max-h-[90vh] p-4 md:p-8 scrollbar-hide">
               {/* Mobile Layout (Image Top, Details Bottom) */}
               <div className="md:hidden">
                 {/* Project Image */}
-                <div className="relative h-64 rounded-2xl overflow-hidden mb-6 shadow-2xl">
+                <div className="relative h-48 rounded-xl overflow-hidden mb-4 shadow-2xl">
                   <img
                     src={project.image}
                     alt={project.name}
@@ -103,17 +161,17 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                 </div>
 
                 {/* Project Title */}
-                <h2 className="text-3xl font-bold text-white mb-4">
+                <h2 className="text-2xl font-bold text-white mb-3">
                   {project.name}
                 </h2>
 
                 {/* Project Description */}
-                <p className="text-white/80 text-base leading-relaxed mb-6">
+                <p className="text-white/80 text-sm leading-relaxed mb-5">
                   {project.fullDescription}
                 </p>
 
                 {/* Action Buttons */}
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {type === 'web' ? (
                     <motion.a
                       href={project.liveUrl}
@@ -121,7 +179,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                      className="flex-1 px-4 py-2.5 bg-accent text-white rounded-lg font-semibold text-sm hover:bg-accent/80 transition-colors shadow-lg text-center"
                     >
                       Visit Live Site
                     </motion.a>
@@ -131,7 +189,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                         href={project.apkUrl}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                        className="flex-1 px-4 py-2.5 bg-accent text-white rounded-lg font-semibold text-sm hover:bg-accent/80 transition-colors shadow-lg text-center"
                       >
                         Download APK
                       </motion.a>
@@ -141,7 +199,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
+                        className="flex-1 px-4 py-2.5 bg-white/10 border-2 border-white/30 text-white rounded-lg font-semibold text-sm hover:border-accent hover:bg-accent/20 transition-colors text-center"
                       >
                         Play Store
                       </motion.a>
@@ -276,7 +334,7 @@ const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => 
 /* Mobile project card (includes download dropdown) */
 const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescription = false }) => (
   <div className="group bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 w-full border border-white/20">
-    <div className="flex h-48 md:h-[370px]">
+    <div className="flex h-56 md:h-[370px]">
       {/* Left Side - Image */}
       <div className="w-2/5 md:w-2/5 relative overflow-hidden bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center p-3 md:p-5">
         <div className="relative w-full h-full flex items-center justify-center">
@@ -365,18 +423,44 @@ const ProjectsPage = () => {
   const [showDownloadOptions, setShowDownloadOptions] = useState({});
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const scrollContainerRef = useRef(null);
 
   const currentProjects = activeTab === 'web' ? portfolioData.web : portfolioData.mobile;
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? currentProjects.length - 1 : prev - 1));
+    const newIndex = currentIndex === 0 ? currentProjects.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.offsetWidth;
+      scrollContainerRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === currentProjects.length - 1 ? 0 : prev + 1));
+    const newIndex = currentIndex === currentProjects.length - 1 ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.offsetWidth;
+      scrollContainerRef.current.scrollTo({
+        left: newIndex * cardWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  const goToSlide = (index) => setCurrentIndex(index);
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.offsetWidth;
+      scrollContainerRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const toggleDownloadOptions = (projectId) => {
     const key = `${activeTab}-${projectId}`;
@@ -393,13 +477,24 @@ const ProjectsPage = () => {
     setSelectedProject(null);
   };
 
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.offsetWidth;
+      const scrollLeft = scrollContainerRef.current.scrollLeft;
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < currentProjects.length) {
+        setCurrentIndex(newIndex);
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-primary/30 py-1 md:py-36 flex items-center relative overflow-hidden">
+    <div className="min-h-screen bg-primary/30 pt-6 md:pt-36 pb-8 md:pb-12 flex items-center relative overflow-hidden">
       <Circles />
       <div className="container mx-auto relative z-20 px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
           {/* Text Section */}
-          <div className="text-center flex xl:w-[30vw] flex-col lg:text-left mb-4 md:mb-4 xl:mb-0">
+          <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 md:mb-8 xl:bottom-10">
             <motion.h2
               variants={fadeIn("up", 0.3)}
               initial="hidden"
@@ -407,14 +502,14 @@ const ProjectsPage = () => {
               exit="hidden"
               className="h2 xl:mt-8 text-white"
             >
-              Selected Works <span className="text-accent">.</span>
+              Selected <span className="text-accent">Works.</span>
             </motion.h2>
             <motion.p
               variants={fadeIn("up", 0.4)}
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="mb-2 md:mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/80 text-sm md:text-base"
+              className="mb-4 md:mb-6 max-w-[400px] mx-auto lg:mx-0 text-white/80 text-sm md:text-base"
             >
               <span className="hidden md:inline">My projects blend creativity and functionality, delivering responsive designs, clean code, smooth performance, and user-centric solutions tailored for real-world impact.</span>
               <span className="md:hidden">Projects that blend creativity with functionality for real-world impact.</span>
@@ -426,7 +521,7 @@ const ProjectsPage = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="flex justify-center lg:justify-start mt-1 md:mt-6"
+              className="flex justify-center lg:justify-start mt-2 md:mt-6"
             >
               <div className="inline-flex bg-white/5 backdrop-blur-sm rounded-full p-1.5 shadow-lg border border-white/10">
                 <button
@@ -479,31 +574,63 @@ const ProjectsPage = () => {
                 <ChevronLeft size={24} />
               </motion.button>
 
-              {/* Projects Container */}
-              <div className="flex-1 overflow-hidden px-0 md:px-4 xl:px-0">
-                <motion.div
-                  key={`${activeTab}-${currentIndex}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full"
-                >
-                  {activeTab === 'web' ? (
-                    <WebProjectCard 
-                      project={currentProjects[currentIndex]} 
-                      showDescription={true}
-                      onViewDetails={() => openModal(currentProjects[currentIndex])}
-                    />
-                  ) : (
-                    <MobileProjectCard
-                      project={currentProjects[currentIndex]}
-                      showDescription={true}
-                      isOpen={!!showDownloadOptions[`${activeTab}-${currentProjects[currentIndex].id}`]}
-                      onToggle={() => toggleDownloadOptions(currentProjects[currentIndex].id)}
-                      onViewDetails={() => openModal(currentProjects[currentIndex])}
-                    />
-                  )}
-                </motion.div>
+              {/* Projects Container with Horizontal Scroll on Mobile */}
+              <div 
+                ref={scrollContainerRef}
+                onScroll={handleScroll}
+                className="flex-1 overflow-x-auto overflow-y-hidden md:overflow-hidden px-0 md:px-4 xl:px-0 snap-x snap-mandatory scrollbar-hide"
+              >
+                <div className="flex md:block gap-4 md:gap-0">
+                  {currentProjects.map((project, index) => (
+                    <div 
+                      key={`${activeTab}-${project.id}`}
+                      className="w-full flex-shrink-0 snap-center md:hidden"
+                    >
+                      {activeTab === 'web' ? (
+                        <WebProjectCard 
+                          project={project} 
+                          showDescription={true}
+                          onViewDetails={() => openModal(project)}
+                        />
+                      ) : (
+                        <MobileProjectCard
+                          project={project}
+                          showDescription={true}
+                          isOpen={!!showDownloadOptions[`${activeTab}-${project.id}`]}
+                          onToggle={() => toggleDownloadOptions(project.id)}
+                          onViewDetails={() => openModal(project)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                  
+                  {/* Desktop view - only current slide */}
+                  <div className="hidden md:block">
+                    <motion.div
+                      key={`${activeTab}-${currentIndex}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      {activeTab === 'web' ? (
+                        <WebProjectCard 
+                          project={currentProjects[currentIndex]} 
+                          showDescription={true}
+                          onViewDetails={() => openModal(currentProjects[currentIndex])}
+                        />
+                      ) : (
+                        <MobileProjectCard
+                          project={currentProjects[currentIndex]}
+                          showDescription={true}
+                          isOpen={!!showDownloadOptions[`${activeTab}-${currentProjects[currentIndex].id}`]}
+                          onToggle={() => toggleDownloadOptions(currentProjects[currentIndex].id)}
+                          onViewDetails={() => openModal(currentProjects[currentIndex])}
+                        />
+                      )}
+                    </motion.div>
+                  </div>
+                </div>
               </div>
 
               {/* Right Navigation Button - Hidden on Mobile */}
@@ -518,7 +645,7 @@ const ProjectsPage = () => {
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex gap-2 mt-4 md:mt-8">
+            <div className="flex gap-2 mt-6 md:mt-8">
               {currentProjects.map((_, index) => (
                 <button
                   key={index}
@@ -540,6 +667,17 @@ const ProjectsPage = () => {
         onClose={closeModal}
         type={activeTab}
       />
+
+      {/* Custom CSS for hiding scrollbar */}
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };
