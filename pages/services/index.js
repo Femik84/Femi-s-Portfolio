@@ -134,6 +134,9 @@ const ServiceSlider = () => {
             bottom: 20px !important;
           }
         }
+        :global(.swiper-wrapper) {
+          transition-timing-function: linear !important;
+        }
       `}</style>
     </Swiper>
   );
@@ -146,7 +149,7 @@ const Bulb = () => <div className="fixed bottom-10 left-10 w-20 h-20 opacity-30 
 // Main Services Component
 const Services = () => {
   return (
-    <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center overflow-hidden">
+    <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center">
       <Circles />
       <div className="container mx-auto px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
@@ -177,7 +180,8 @@ const Services = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="w-full xl:max-w-[65%] xl:pr-8 overflow-hidden"
+            className="w-full xl:max-w-[65%] xl:pr-8"
+            style={{ overflow: 'hidden' }}
           >
             {/* slider */}
             <ServiceSlider />
