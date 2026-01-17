@@ -17,16 +17,14 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-// Fade in animation variants
+// Fade in animation variants with left/right exit
 const fadeIn = (direction, delay) => {
   return {
     hidden: {
-      y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
-      x: direction === 'left' ? 40 : direction === 'right' ? -40 : 0,
+      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
       opacity: 0,
     },
     show: {
-      y: 0,
       x: 0,
       opacity: 1,
       transition: {
@@ -37,8 +35,7 @@ const fadeIn = (direction, delay) => {
       },
     },
     exit: {
-      y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
-      x: direction === 'left' ? 40 : direction === 'right' ? -40 : 0,
+      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
       opacity: 0,
       transition: {
         type: 'tween',
@@ -134,7 +131,7 @@ const ServiceSlider = () => {
       <style jsx>{`
         @media (max-width: 639px) {
           :global(.swiper-pagination) {
-            bottom: 10px !important;
+            bottom: 20px !important;
           }
         }
       `}</style>
@@ -156,7 +153,7 @@ const Services = () => {
           {/* Text */}
           <div className="text-center flex xl:w-[30vw] relative top-3 flex-col lg:text-left mb-8 xl:mb-0">
             <motion.h2
-              variants={fadeIn('up', 0.3)}
+              variants={fadeIn('left', 0.3)}
               initial="hidden"
               animate="show"
               exit="exit"
@@ -165,7 +162,7 @@ const Services = () => {
               My <span className="text-accent">Services</span><span className="text-accent">.</span>
             </motion.h2>
             <motion.p
-              variants={fadeIn('up', 0.4)}
+              variants={fadeIn('left', 0.4)}
               initial="hidden"
               animate="show"
               exit="exit"
@@ -176,7 +173,7 @@ const Services = () => {
           </div>
 
           <motion.div
-            variants={fadeIn('down', 0.6)}
+            variants={fadeIn('right', 0.6)}
             initial="hidden"
             animate="show"
             exit="exit"

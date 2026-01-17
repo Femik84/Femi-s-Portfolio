@@ -14,30 +14,28 @@ import { fadeIn } from "../variants";
 import ProjectsBtn2 from "../components/ProjectsBtn2";
 
 const Home = () => {
-  // Smooth entry and exit variants
+  // Smooth entry and exit variants - matched to About page timing
   const titleVariants = {
     hidden: { 
       opacity: 0, 
       y: -60,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
-      }
     },
     show: { 
       opacity: 1, 
       y: 0,
       transition: {
+        type: "tween",
         duration: 0.8,
-        ease: [0.6, 0.05, 0.01, 0.9]
+        ease: [0.25, 0.25, 0.25, 0.75],
       }
     },
     exit: {
       opacity: 0,
       x: -100,
       transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
+        type: "tween",
+        duration: 0.8,
+        ease: [0.25, 0.25, 0.25, 0.75],
       }
     }
   };
@@ -46,26 +44,24 @@ const Home = () => {
     hidden: { 
       opacity: 0, 
       y: -40,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
-      }
     },
     show: { 
       opacity: 1, 
       y: 0,
       transition: {
+        type: "tween",
         duration: 0.8,
         delay: 0.2,
-        ease: [0.6, 0.05, 0.01, 0.9]
+        ease: [0.25, 0.25, 0.25, 0.75],
       }
     },
     exit: {
       opacity: 0,
       x: -100,
       transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
+        type: "tween",
+        duration: 0.8,
+        ease: [0.25, 0.25, 0.25, 0.75],
       }
     }
   };
@@ -74,26 +70,24 @@ const Home = () => {
     hidden: { 
       opacity: 0, 
       y: 40,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
-      }
     },
     show: { 
       opacity: 1, 
       y: 0,
       transition: {
+        type: "tween",
         duration: 0.8,
         delay: 0.4,
-        ease: [0.6, 0.05, 0.01, 0.9]
+        ease: [0.25, 0.25, 0.25, 0.75],
       }
     },
     exit: {
       opacity: 0,
       x: 100,
       transition: {
-        duration: 0.5,
-        ease: [0.6, 0.05, 0.01, 0.9]
+        type: "tween",
+        duration: 0.8,
+        ease: [0.25, 0.25, 0.25, 0.75],
       }
     }
   };

@@ -45,6 +45,17 @@ const fadeIn = (direction, delay) => ({
       ease: [0.25, 0.25, 0.25, 0.75],
     },
   },
+  exit: {
+    y: direction === "up" ? -40 : direction === "down" ? 40 : 0,
+    x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
+    opacity: 0,
+    transition: {
+      type: "tween",
+      duration: 0.8,
+      delay: 0,
+      ease: [0.25, 0.25, 0.25, 0.75],
+    },
+  },
 });
 
 // Updated data structure
@@ -157,7 +168,7 @@ const About = () => {
             variants={fadeIn("right", 0.2)}
             initial="hidden"
             animate="show"
-            exit="hidden"
+            exit="exit"
             className="h2 sm:text-[28px] text-[24px]"
           >
             Captivating <span className="text-accent">stories birth</span>
@@ -168,7 +179,7 @@ const About = () => {
             variants={fadeIn("right", 0.4)}
             initial="hidden"
             animate="show"
-            exit="hidden"
+            exit="exit"
             className="max-w-[500px] sm:text-[17px] text-[14px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0"
           >
             I build responsive interfaces with HTML, CSS, JavaScript, React,
@@ -182,7 +193,7 @@ const About = () => {
             variants={fadeIn("right", 0.6)}
             initial="hidden"
             animate="show"
-            exit="hidden"
+            exit="exit"
             className="hidden md:flex md:max-w-xl xl:max-w-none mx-auto xl:mx-0 mb-8"
           >
             <div className="flex flex-1 xl:gap-x-4">
@@ -224,7 +235,7 @@ const About = () => {
           variants={fadeIn("left", 0.4)}
           initial="hidden"
           animate="show"
-          exit="hidden"
+          exit="exit"
           className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
         >
           <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4">
