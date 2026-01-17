@@ -394,12 +394,12 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary/30 py-16 md:py-36 flex items-center relative overflow-hidden">
+    <div className="min-h-screen bg-primary/30 py-1 md:py-36 flex items-center relative overflow-hidden">
       <Circles />
       <div className="container mx-auto relative z-20 px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
           {/* Text Section */}
-          <div className="text-center flex xl:w-[30vw] flex-col lg:text-left mb-6 md:mb-4 xl:mb-0">
+          <div className="text-center flex xl:w-[30vw] flex-col lg:text-left mb-4 md:mb-4 xl:mb-0">
             <motion.h2
               variants={fadeIn("up", 0.3)}
               initial="hidden"
@@ -414,7 +414,7 @@ const ProjectsPage = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="mb-3 md:mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/80 text-sm md:text-base"
+              className="mb-2 md:mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/80 text-sm md:text-base"
             >
               <span className="hidden md:inline">My projects blend creativity and functionality, delivering responsive designs, clean code, smooth performance, and user-centric solutions tailored for real-world impact.</span>
               <span className="md:hidden">Projects that blend creativity with functionality for real-world impact.</span>
@@ -426,7 +426,7 @@ const ProjectsPage = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="flex justify-center lg:justify-start mt-2 md:mt-6"
+              className="flex justify-center lg:justify-start mt-1 md:mt-6"
             >
               <div className="inline-flex bg-white/5 backdrop-blur-sm rounded-full p-1.5 shadow-lg border border-white/10">
                 <button
@@ -518,7 +518,7 @@ const ProjectsPage = () => {
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex gap-2 mt-6 md:mt-8">
+            <div className="flex gap-2 mt-4 md:mt-8">
               {currentProjects.map((_, index) => (
                 <button
                   key={index}
