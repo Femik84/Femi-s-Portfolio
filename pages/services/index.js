@@ -177,7 +177,7 @@ const Services = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="w-full xl:max-w-[65%] xl:pr-8"
+            className="w-full xl:max-w-[65%] xl:pr-8 overflow-hidden"
           >
             {/* slider */}
             <ServiceSlider />
