@@ -131,7 +131,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="btn rounded-full border border-white/50 max-w-[120px] px-4 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative"
+              className="btn rounded-full border border-white/50 max-w-[120px] px-3 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative"
               disabled={isSending || buttonText === "Message sent!"}
             >
               <span

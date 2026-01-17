@@ -17,7 +17,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-// Fade in animation variants with left/right exit
+// Smooth fade animation variants
 const fadeIn = (direction, delay) => {
   return {
     hidden: {
@@ -146,7 +146,7 @@ const Bulb = () => <div className="fixed bottom-10 left-10 w-20 h-20 opacity-30 
 // Main Services Component
 const Services = () => {
   return (
-    <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center">
+    <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center overflow-hidden">
       <Circles />
       <div className="container mx-auto px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
