@@ -489,7 +489,7 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary/30 pt-6 md:pt-36 pb-8 md:pb-12 flex items-center relative overflow-hidden">
+    <div className="min-h-screen bg-primary/30 md:pt-36 pb-8 md:pb-12 flex items-center relative overflow-hidden">
       <Circles />
       <div className="container mx-auto relative z-20 px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
