@@ -17,31 +17,45 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-// Smooth fade animation variants
-const fadeIn = (direction, delay) => {
+// Improved fade/slide animation variants using viewport units and will-change for smoother GPU compositing
+const fadeIn = (direction = 'left', delay = 0) => {
+  // Use full-viewport translation to avoid partial overlap when sliding out
+  const xHidden = direction === 'left' ? '-100vw' : direction === 'right' ? '100vw' : '0';
   return {
     hidden: {
-      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
+      x: xHidden,
       opacity: 0,
+      // hint for compositor
+      transition: {
+        type: 'tween',
+        duration: 0.8,
+        delay,
+        ease: 'easeInOut',
+      },
+      // keep it on its own composite layer
+      willChange: 'transform, opacity',
     },
     show: {
       x: 0,
       opacity: 1,
+      zIndex: 2,
       transition: {
         type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        duration: 0.9,
+        delay,
+        ease: 'easeInOut',
       },
+      willChange: 'transform, opacity',
     },
     exit: {
-      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
+      x: xHidden,
       opacity: 0,
       transition: {
         type: 'tween',
-        duration: 1.2,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        duration: 0.8,
+        ease: 'easeInOut',
       },
+      willChange: 'transform, opacity',
     },
   };
 };
@@ -51,37 +65,44 @@ const serviceData = [
   {
     icon: <RxDesktop />,
     title: "Web Applications",
-    description: "Full-stack web apps built with React and modern frameworks, powered by Python/Django backends for scalability, performance, and seamless user experiences that grow with your business.",
+    description:
+      "Full-stack web apps built with React and modern frameworks, powered by Python/Django backends for scalability, performance, and seamless user experiences that grow with your business.",
   },
   {
     icon: <RxMobile />,
     title: "Mobile Apps",
-    description: "Cross-platform mobile applications with smooth UX and intuitive design, built using React Native and integrated with robust backend systems for native-like performance.",
+    description:
+      "Cross-platform mobile applications with smooth UX and intuitive design, built using React Native and integrated with robust backend systems for native-like performance.",
   },
   {
     icon: <RxGlobe />,
     title: "Landing Pages",
-    description: "High-converting, responsive landing pages designed to capture attention, drive engagement, and boost conversions with stunning visuals and optimized performance across all devices.",
+    description:
+      "High-converting, responsive landing pages designed to capture attention, drive engagement, and boost conversions with stunning visuals and optimized performance across all devices.",
   },
   {
     icon: <RxCode />,
     title: "Backend Development",
-    description: "Secure, scalable APIs and server-side solutions using Python and Django, optimized for speed, reliability, and handling complex business logic with enterprise-grade architecture.",
+    description:
+      "Secure, scalable APIs and server-side solutions using Python and Django, optimized for speed, reliability, and handling complex business logic with enterprise-grade architecture.",
   },
   {
     icon: <RxDashboard />,
     title: "Admin Dashboards",
-    description: "Custom admin panels and dashboards with real-time data visualization, analytics, and intuitive controls built for seamless management and informed decision-making.",
+    description:
+      "Custom admin panels and dashboards with real-time data visualization, analytics, and intuitive controls built for seamless management and informed decision-making.",
   },
   {
     icon: <RxLayers />,
     title: "API Integration",
-    description: "Seamless third-party API integration and custom API development to connect your apps with powerful external services, payment gateways, and modern cloud platforms.",
+    description:
+      "Seamless third-party API integration and custom API development to connect your apps with powerful external services, payment gateways, and modern cloud platforms.",
   },
   {
     icon: <RxRocket />,
     title: "MVP Development",
-    description: "Rapid MVP development to validate your ideas quickly with fully functional prototypes, core features, and market-ready solutions that get you to launch faster.",
+    description:
+      "Rapid MVP development to validate your ideas quickly with fully functional prototypes, core features, and market-ready solutions that get you to launch faster.",
   },
 ];
 
@@ -107,35 +128,66 @@ const ServiceSlider = () => {
         '--swiper-pagination-bottom': '0px',
         '--swiper-pagination-color': '#f13024',
         paddingBottom: '25px',
+        // Ensure the Swiper's container doesn't show layout shifts when its parent translates
+        overflow: 'hidden',
       }}
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-[rgba(65,47,123,0.15)] h-[257px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
-            {/* icon */}
-            <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
+          {/* Wrap the card in motion.div for consistent transform/opacity handling
+              and set will-change to hint the browser to use its compositor. */}
+          <motion.div
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={{
+              hidden: { opacity: 0, y: 12, scale: 0.995, transition: { duration: 0.45, ease: 'easeOut' }, willChange: 'transform, opacity' },
+              show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' }, willChange: 'transform, opacity' },
+              exit: { opacity: 0, y: 12, scale: 0.995, transition: { duration: 0.45, ease: 'easeIn' }, willChange: 'transform, opacity' },
+            }}
+            className="h-full"
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <div className="bg-[rgba(65,47,123,0.15)] h-[257px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
+              {/* icon */}
+              <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
 
-            {/* title & description */}
-            <div className="mb-3 sm:mb-4 flex-1">
-              <h3 className="text-lg sm:text-lg mb-1.5 sm:mb-2 font-semibold">{item.title}</h3>
-              <p className="text-sm sm:text-sm leading-relaxed text-white/80">{item.description}</p>
-            </div>
+              {/* title & description */}
+              <div className="mb-3 sm:mb-4 flex-1">
+                <h3 className="text-lg sm:text-lg mb-1.5 sm:mb-2 font-semibold">{item.title}</h3>
+                <p className="text-sm sm:text-sm leading-relaxed text-white/80">{item.description}</p>
+              </div>
 
-            {/* arrow */}
-            <div className="text-3xl sm:text-3xl shrink-0">
-              <RxArrowTopRight className="group-hover:rotate-45 group-hover:text-accent transition-all duration-300" />
+              {/* arrow */}
+              <div className="text-3xl sm:text-3xl shrink-0">
+                <RxArrowTopRight className="group-hover:rotate-45 group-hover:text-accent transition-all duration-300" />
+              </div>
             </div>
-          </div>
+          </motion.div>
         </SwiperSlide>
       ))}
+
       <style jsx>{`
+        /* Prevent slides from stacking vertically and encourage GPU compositing */
+        :global(.swiper-wrapper) {
+          transition-timing-function: linear !important;
+          will-change: transform !important;
+        }
+        :global(.swiper) {
+          overflow: hidden !important;
+          will-change: transform, opacity;
+        }
+        /* Make each slide take full height and lay out as inline-flex so they don't collapse/stack during parent transforms */
+        :global(.swiper-slide) {
+          display: inline-flex !important;
+          align-items: stretch !important;
+          height: 100% !important;
+        }
+
         @media (max-width: 639px) {
           :global(.swiper-pagination) {
             bottom: 20px !important;
           }
-        }
-        :global(.swiper-wrapper) {
-          transition-timing-function: linear !important;
         }
       `}</style>
     </Swiper>
@@ -149,7 +201,15 @@ const Bulb = () => <div className="fixed bottom-10 left-10 w-20 h-20 opacity-30 
 // Main Services Component
 const Services = () => {
   return (
-    <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center">
+    <motion.div
+      // Animate the whole section left/right using viewport offsets so it won't leave half-exposed children
+      variants={fadeIn('left', 0.1)}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center"
+      style={{ willChange: 'transform, opacity' }}
+    >
       <Circles />
       <div className="container mx-auto px-4">
         <div className="flex flex-col xl:flex-row gap-x-8">
@@ -161,6 +221,7 @@ const Services = () => {
               animate="show"
               exit="exit"
               className="text-3xl sm:text-4xl xl:text-5xl font-bold xl:mt-8 mb-3 sm:mb-4"
+              style={{ willChange: 'transform, opacity' }}
             >
               My <span className="text-accent">Services</span><span className="text-accent">.</span>
             </motion.h2>
@@ -170,6 +231,7 @@ const Services = () => {
               animate="show"
               exit="exit"
               className="text-base sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
+              style={{ willChange: 'transform, opacity' }}
             >
               Full-stack development services specializing in web and mobile applications, from sleek landing pages to scalable backends built with Python and Django.
             </motion.p>
@@ -181,7 +243,7 @@ const Services = () => {
             animate="show"
             exit="exit"
             className="w-full xl:max-w-[65%] xl:pr-8"
-            style={{ overflow: 'hidden' }}
+            style={{ overflow: 'hidden', willChange: 'transform, opacity' }}
           >
             {/* slider */}
             <ServiceSlider />
@@ -189,7 +251,7 @@ const Services = () => {
         </div>
       </div>
       <Bulb />
-    </div>
+    </motion.div>
   );
 };
 
