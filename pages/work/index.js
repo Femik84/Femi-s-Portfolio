@@ -92,7 +92,7 @@ const Circles = () => (
 /* Reusable fade variant */
 const fadeIn = (direction, delay) => ({
   hidden: {
-    y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+    y: 0,
     opacity: 0,
     x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     transition: {
@@ -496,7 +496,7 @@ const ProjectsPage = () => {
           {/* Text Section */}
           <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 md:mb-8 xl:bottom-10">
             <motion.h2
-              variants={fadeIn("up", 0.3)}
+              variants={fadeIn("right", 0.3)}
               initial="hidden"
               animate="show"
               exit="hidden"
@@ -505,7 +505,7 @@ const ProjectsPage = () => {
               Selected <span className="text-accent">Works.</span>
             </motion.h2>
             <motion.p
-              variants={fadeIn("up", 0.4)}
+              variants={fadeIn("right", 0.4)}
               initial="hidden"
               animate="show"
               exit="hidden"
@@ -517,7 +517,7 @@ const ProjectsPage = () => {
 
             {/* Tab Switcher */}
             <motion.div
-              variants={fadeIn("up", 0.5)}
+              variants={fadeIn("right", 0.5)}
               initial="hidden"
               animate="show"
               exit="hidden"
@@ -557,7 +557,7 @@ const ProjectsPage = () => {
 
           {/* Projects Section */}
           <motion.div
-            variants={fadeIn("down", 0.6)}
+            variants={fadeIn("left", 0.6)}
             initial="hidden"
             animate="show"
             exit="hidden"
