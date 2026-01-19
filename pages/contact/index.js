@@ -3,14 +3,19 @@ import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import emailjs from '@emailjs/browser';
 
-// You'll need to import these from your project
-// import Circles from "../../components/Circles";
-// import { fadeIn } from "../../variants";
-
-// Temporary fadeIn variant for demo
+// Updated fadeIn variant with slower exit
 const fadeIn = (direction, delay) => ({
   hidden: { opacity: 0, y: direction === "up" ? 40 : -40 },
-  show: { opacity: 1, y: 0, transition: { delay, duration: 0.5 } }
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { delay, duration: 0.5 } 
+  },
+  exit: { 
+    opacity: 0, 
+    y: direction === "up" ? 40 : -40,
+    transition: { duration: 0.5 }
+  }
 });
 
 const Contact = () => {
@@ -35,7 +40,6 @@ const Contact = () => {
     setIsSending(true);
     setButtonText("Sending...");
 
-    // EmailJS template parameters
     const templateParams = {
       firstName: `${formData.firstName} ${formData.lastName}`,
       email: formData.email,
@@ -43,7 +47,6 @@ const Contact = () => {
     };
 
     try {
-      // Send email to receiver (you)
       await emailjs.send(
         'service_w27va0i',
         'template_nu1ti4f',
@@ -51,7 +54,6 @@ const Contact = () => {
         '0ZguZ331NCdgDPrpu'
       );
 
-      // Send confirmation email to sender
       await emailjs.send(
         'service_w27va0i',
         'template_o8d38ie',
@@ -63,7 +65,6 @@ const Contact = () => {
       setButtonText("Message sent!");
       setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" });
       
-      // Reset button text after 3 seconds
       setTimeout(() => {
         setButtonText("Let's talk");
       }, 2000);
@@ -82,13 +83,13 @@ const Contact = () => {
 
   return (
     <div className="h-full bg-primary/30">
-      <div className="container mx-auto pt-10 py-16 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
+      <div className="container mx-auto pt-8 py-16 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
         <div className="flex flex-col w-full max-w-[700px]">
           <motion.h2
             variants={fadeIn("up", 0.2)}
             initial="hidden"
             animate="show"
-            exit="hidden"
+            exit="exit"
             className="h2 text-[30px] md:text-[36px] mb-6 text-center xl:text-left"
           >
             Let&apos;s <span className="text-accent">connect.</span>
@@ -98,11 +99,10 @@ const Contact = () => {
             variants={fadeIn("up", 0.3)}
             initial="hidden"
             animate="show"
-            exit="hidden"
+            exit="exit"
             onSubmit={handleSubmit}
             className="flex-1 flex flex-col gap-5 w-full mx-auto"
           >
-            {/* First Name and Last Name */}
             <div className="flex gap-4 w-full">
               <input
                 type="text"
@@ -126,7 +126,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Email */}
             <input
               type="email"
               name="email"
@@ -138,7 +137,6 @@ const Contact = () => {
               disabled={isSending}
             />
 
-            {/* Subject */}
             <input
               type="text"
               name="subject"
@@ -150,7 +148,6 @@ const Contact = () => {
               disabled={isSending}
             />
 
-            {/* Message */}
             <textarea
               name="message"
               value={formData.message}
@@ -161,7 +158,6 @@ const Contact = () => {
               disabled={isSending}
             />
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="btn rounded-full border border-white/50 w-[120px] lg:w-[170px] px-2 lg:px-5 lg:py-3 py-1 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative disabled:opacity-60 disabled:cursor-not-allowed bg-transparent hover:bg-accent/10"
@@ -181,7 +177,6 @@ const Contact = () => {
               )}
             </button>
 
-            {/* Status Message */}
             {status && (
               <motion.p
                 initial={{ opacity: 0, y: -10 }}
