@@ -82,14 +82,14 @@ const Contact = () => {
 
   return (
     <div className="h-full bg-primary/30">
-      <div className="container mx-auto py-16 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
+      <div className="container mx-auto pt-10 py-16 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
         <div className="flex flex-col w-full max-w-[700px]">
           <motion.h2
             variants={fadeIn("up", 0.2)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2 text-[28px] md:text-[36px] mb-6 text-center xl:text-left"
+            className="h2 text-[30px] md:text-[36px] mb-6 text-center xl:text-left"
           >
             Let&apos;s <span className="text-accent">connect.</span>
           </motion.h2>
@@ -164,7 +164,7 @@ const Contact = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="btn rounded-full border border-white/50 w-[170px] px-3 py-2 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative disabled:opacity-60 disabled:cursor-not-allowed bg-transparent hover:bg-accent/10"
+              className="btn rounded-full border border-white/50 w-[120px] lg:w-[170px] px-2 lg:px-5 lg:py-3 py-1 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative disabled:opacity-60 disabled:cursor-not-allowed bg-transparent hover:bg-accent/10"
               disabled={isSending}
             >
               <span
