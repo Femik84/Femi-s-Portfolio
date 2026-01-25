@@ -36,30 +36,33 @@ const portfolioData = {
   mobile: [
     {
       id: 1,
-      name: 'Fitness Tracker',
-      description: 'Track workouts and achieve your fitness goals',
-      fullDescription: 'A comprehensive fitness tracking application that helps users monitor their workouts, set goals, and track progress with detailed analytics and personalized recommendations.',
-      image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80',
-      apkUrl: '#',
-      playStoreUrl: '#'
+      name: 'Chattr',
+      description: 'Social media app to post, follow, message and get instant notifications',
+      fullDescription:
+        'Chattr is a real-time social media experience where users can create posts, follow friends, maintain profiles, and message each other instantly. The app includes push notifications for new messages and interactions, clean feed and profile views, and a fast messaging flow so conversations stay snappy and engaging.',
+      image: '/chattr.jpg',
+      apkUrl: 'https://github.com/Femik84/Projects/releases/download/V1.0.0/application-f5d89495-c695-4dcc-ab5c-84f20c5369d2.apk',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=com.femik.chattr'
     },
     {
       id: 2,
-      name: 'Recipe Manager',
-      description: 'Organize and discover delicious recipes',
-      fullDescription: 'An intuitive recipe management app that allows users to save favorite recipes, create shopping lists, and discover new culinary inspirations with smart categorization.',
-      image: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&q=80',
-      apkUrl: '#',
-      playStoreUrl: '#'
+      name: 'Ledgerly',
+      description: 'Expense & budget tracker with spending insights and alerts',
+      fullDescription:
+        'Ledgerly helps users create budgets, record and categorize expenses, and visualize spending trends with clear charts and statistics. It provides budget alerts and notifications tied to spending thresholds, helping users stay on track financially with insightful summaries and easy transaction entry.',
+      image: '/ledgerly.jpg',
+      apkUrl: 'https://github.com/Femik84/Ledgerly-Release/releases/download/V1.0.0/Ledgerly.apk',
+      playStoreUrl: '#' // no Play Store release available
     },
     {
       id: 3,
-      name: 'Budget Planner',
-      description: 'Manage your finances with ease',
-      fullDescription: 'A powerful budgeting tool that helps users track expenses, set financial goals, and gain insights into spending patterns with visual reports and alerts.',
-      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
-      apkUrl: '#',
-      playStoreUrl: '#'
+      name: 'FastCart',
+      description: 'E‑commerce app for gadgets with Stripe payments and order tracking',
+      fullDescription:
+        'FastCart is a streamlined e‑commerce app focused on gadgets and electronics. Users can browse products, search for items, complete secure Stripe-powered checkouts, and view order details and status updates. FastCart emphasizes quick product discovery, clear order flows, and easy post-purchase tracking.',
+      image: '/FastCart.jpg',
+      apkUrl: 'https://github.com/Femik84/Fast-art-Release-/releases/download/V1.0.0/FastCart.apk',
+      playStoreUrl: 'https://play.google.com/store/apps/details?id=com.ayo234.Fastcart_'
     }
   ]
 };
@@ -363,7 +366,7 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
           <img
             src={project.image}
             alt={project.name}
-            className="w-full h-[94%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-[102%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       </div>
