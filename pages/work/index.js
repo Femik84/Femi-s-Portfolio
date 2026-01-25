@@ -310,7 +310,7 @@ const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => 
      <img
   src={project.image}
   alt={project.name}
-  className="absolute top-[-44px] lg:top-[-54px] left-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+  className="absolute top-[-42px] lg:top-[-54px] left-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
 />
 
       {/* dark gradient overlay to ensure contrast */}
