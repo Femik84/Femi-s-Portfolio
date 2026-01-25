@@ -2,32 +2,35 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ChevronDown, X } from 'lucide-react';
 
-/* Sample Portfolio Data */
+
 const portfolioData = {
   web: [
     {
       id: 1,
-      name: 'E-Commerce Platform',
-      description: 'A modern online shopping experience with seamless checkout',
-      fullDescription: 'A fully responsive e-commerce platform built with React and Node.js, featuring real-time inventory management, secure payment processing, and an intuitive user interface that drives conversions.',
-      image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
-      liveUrl: '#'
+      name: 'Fade & Finishes',
+      description: 'Modern salon & barber booking with gallery and appointment scheduling',
+      fullDescription:
+        'Fade & Finishes is a polished beauty and barber salon web experience that allows clients to browse services (hair styling, barbering, pedicures, manicures, etc.), explore high-quality service galleries, check availability, and book appointments online. Built for responsiveness and conversion, it focuses on clear service presentation, smooth booking flows, and visual inspiration to help users pick the right stylist or treatment.',
+      image: '/Fade%20%26%20Finishes.png',
+      liveUrl: 'https://fade-and-finishes-frontend-f1ys.vercel.app/'
     },
     {
       id: 2,
-      name: 'Portfolio Dashboard',
-      description: 'Analytics dashboard for tracking portfolio performance',
-      fullDescription: 'An interactive analytics dashboard that provides real-time insights into portfolio performance, featuring customizable widgets, data visualizations, and comprehensive reporting tools.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-      liveUrl: '#'
+      name: 'Wavify',
+      description: 'Music discovery & playlist experience with clean, immersive UI',
+      fullDescription:
+        'Wavify is a modern music app centered on discovery, playlists, and effortless listening. Users can explore new releases and curated picks, build and manage personal playlists, and enjoy a minimal, responsive player interface that keeps listening smooth and delightful. Wavify emphasizes curated recommendations, quick access to trending tracks, and a cohesive playback experience across devices.',
+      image: '/Wavify.png',
+      liveUrl: 'https://wavify-alpha.vercel.app/'
     },
     {
       id: 3,
-      name: 'Social Media App',
-      description: 'Connect and share with friends in real-time',
-      fullDescription: 'A modern social networking platform with real-time messaging, media sharing, and community features designed to foster meaningful connections.',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80',
-      liveUrl: '#'
+      name: 'Movie Landing Page',
+      description: 'Cinematic landing page for showcasing movies, trailers and posters',
+      fullDescription:
+        'Movie Landing Page is a visually-driven film showcase focused on beautiful poster-first layouts, hero carousels, and sleek metadata cards. It helps visitors discover films, watch trailers, and explore cast/genre information in a gallery-like experience designed to highlight visual assets and drive engagement. Perfect for movie promos, festival lineups, or streaming previews.',
+      image: '/Movies.png',
+      liveUrl: 'https://moviebox-yo7e.onrender.com/'
     }
   ],
   mobile: [
@@ -117,7 +120,7 @@ const fadeIn = (direction, delay) => ({
 
 /* Project Details Modal */
 const ProjectModal = ({ project, isOpen, onClose, type }) => {
-  if (!isOpen) return null;
+  if (!isOpen || !project) return null;
 
   return (
     <AnimatePresence>
@@ -130,55 +133,61 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-white/20 shadow-2xl"
+            className="relative bg-gradient-to-br from-[#0f1724] to-[#071029] rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-white/10 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <motion.button
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05, rotate: 90 }}
+              whileTap={{ scale: 0.95 }}
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 bg-black rounded-full text-white hover:bg-black transition-all shadow-lg"
+              className="absolute top-4 right-4 z-20 p-2 bg-black/60 rounded-full text-white hover:bg-black transition-all shadow-lg"
             >
-              <X size={24} />
+              <X size={22} />
             </motion.button>
 
             <div className="overflow-y-auto max-h-[90vh] p-4 md:p-8 scrollbar-hide">
-              {/* Mobile Layout (Image Top, Details Bottom) */}
+              {/* Mobile Layout */}
               <div className="md:hidden">
-                {/* Project Image */}
-                <div className="relative h-48 rounded-xl overflow-hidden mb-4 shadow-2xl">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                </div>
+                {/* If mobile project: show phone mock; else use full-width image */}
+                {type === 'mobile' ? (
+                  <div className="flex justify-center mb-4">
+                    {/* Phone mock frame */}
+                    <div className="w-44 sm:w-52 md:w-60 bg-black/80 rounded-3xl p-2 shadow-2xl border border-white/10">
+                      <div className="bg-[#05061a] rounded-2xl overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.name}
+                          className="w-full h-[290px] sm:h-[290px] object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative h-36 rounded-xl overflow-hidden mb-4 shadow-2xl">
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </div>
+                )}
 
-                {/* Project Title */}
-                <h2 className="text-2xl font-bold text-white mb-3">
-                  {project.name}
-                </h2>
+                <h2 className="text-2xl font-bold text-white mb-3">{project.name}</h2>
+                <p className="text-white/80 text-sm leading-relaxed mb-5">{project.fullDescription}</p>
 
-                {/* Project Description */}
-                <p className="text-white/80 text-sm leading-relaxed mb-5">
-                  {project.fullDescription}
-                </p>
-
-                {/* Action Buttons */}
                 <div className="flex flex-wrap gap-2">
                   {type === 'web' ? (
                     <motion.a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
                       className="flex-1 px-4 py-2.5 bg-accent text-white rounded-lg font-semibold text-sm hover:bg-accent/80 transition-colors shadow-lg text-center"
                     >
                       Visit Live Site
@@ -187,8 +196,8 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                     <>
                       <motion.a
                         href={project.apkUrl}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
                         className="flex-1 px-4 py-2.5 bg-accent text-white rounded-lg font-semibold text-sm hover:bg-accent/80 transition-colors shadow-lg text-center"
                       >
                         Download APK
@@ -197,8 +206,8 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                         href={project.playStoreUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
                         className="flex-1 px-4 py-2.5 bg-white/10 border-2 border-white/30 text-white rounded-lg font-semibold text-sm hover:border-accent hover:bg-accent/20 transition-colors text-center"
                       >
                         Play Store
@@ -208,41 +217,49 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                 </div>
               </div>
 
-              {/* Desktop Layout (Image Left, Details Right) */}
+              {/* Desktop Layout */}
               <div className="hidden md:flex gap-8">
-                {/* Left Side - Image */}
+                {/* Left Side - If mobile project show phone mock on left; otherwise show large image */}
                 <div className="w-1/2 flex-shrink-0">
-                  <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden shadow-2xl sticky top-0">
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="relative h-full min-h-[420px] rounded-2xl overflow-hidden shadow-2xl sticky top-0">
+                    {type === 'mobile' ? (
+                      <div className="flex items-center justify-center p-6 w-full h-full">
+                        <div className="w-[260px] sm:w-[320px] bg-black/80 rounded-3xl p-3 shadow-xl border border-white/10">
+                          <div className="bg-[#05061a] rounded-2xl overflow-hidden">
+                            <img
+                              src={project.image}
+                              alt={project.name}
+                              className="w-full h-[420px] sm:h-[420px] md:h-[420px] object-cover"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <img
+                          src={project.image}
+                          alt={project.name}
+                          className="w-full h-full object-contain"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      </>
+                    )}
                   </div>
                 </div>
 
                 {/* Right Side - Details */}
                 <div className="w-1/2 flex flex-col">
-                  {/* Project Title */}
-                  <h2 className="text-4xl font-bold text-white mb-4">
-                    {project.name}
-                  </h2>
+                  <h2 className="text-4xl font-bold text-white mb-4">{project.name}</h2>
+                  <p className="text-white/80 text-lg leading-relaxed mb-6">{project.fullDescription}</p>
 
-                  {/* Project Description */}
-                  <p className="text-white/80 text-lg leading-relaxed mb-6">
-                    {project.fullDescription}
-                  </p>
-
-                  {/* Action Buttons */}
                   <div className="flex flex-wrap gap-3 mt-auto">
                     {type === 'web' ? (
                       <motion.a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
                         className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
                       >
                         Visit Live Site
@@ -251,8 +268,8 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                       <>
                         <motion.a
                           href={project.apkUrl}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
                           className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
                         >
                           Download APK
@@ -261,8 +278,8 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                           href={project.playStoreUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
                           className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
                         >
                           Play Store
@@ -274,15 +291,9 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
               </div>
             </div>
 
-            {/* Custom CSS for hiding scrollbar */}
             <style>{`
-              .scrollbar-hide::-webkit-scrollbar {
-                display: none;
-              }
-              .scrollbar-hide {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-              }
+              .scrollbar-hide::-webkit-scrollbar { display: none; }
+              .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
           </motion.div>
         </motion.div>
@@ -291,57 +302,68 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
   );
 };
 
-/* Web project card */
-const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => (
-  <div className="group bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 w-full border border-white/20">
-    <div className="relative h-36 md:h-48 overflow-hidden bg-gray-900/50">
-      <img
-        src={project.image}
-        alt={project.name}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-accent/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    </div>
-    <div className="p-4 md:p-5">
-      <h3 className="text-base md:text-lg font-bold text-white mb-1 md:mb-2">{project.name}</h3>
-      {showDescription && (
-        <p className="hidden md:block text-sm text-white/70 mb-4 line-clamp-2">{project.description}</p>
-      )}
-      <div className="flex gap-2 mt-3 md:mt-4">
-        <motion.button
-          onClick={onViewDetails}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-1 px-3 py-1.5 md:py-2 bg-accent text-white rounded-lg font-medium text-center text-xs md:text-sm hover:bg-accent/80 transition-colors"
-        >
-          View Details
-        </motion.button>
-        <motion.a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-1 px-3 py-1.5 md:py-2 border-2 border-accent text-accent rounded-lg font-medium text-center text-xs md:text-sm hover:bg-accent hover:text-white transition-colors"
-        >
-          Visit Live
-        </motion.a>
+/* Web project card - image fills whole card, content overlays with gradient under text */
+const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => {
+  return (
+    <div className="relative rounded-2xl overflow-hidden shadow-lg border border-white/10 w-full h-[245px] md:h-64 lg:h-[350px] ">
+      {/* Background image fills entire card */}
+     <img
+  src={project.image}
+  alt={project.name}
+  className="absolute top-[-44px] lg:top-[-54px] left-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+/>
+
+      {/* dark gradient overlay to ensure contrast */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent" />
+
+      {/* Content container sits on top */}
+      <div className="absolute left-0 right-0 bottom-0 p-4 md:p-5 z-10">
+        {/* subtle frosted bar (overlay under the text) */}
+        <div className="absolute left-4 right-4 -bottom-2 h-24 rounded-t-xl bg-black/40 blur-sm pointer-events-none" />
+
+        <div className="relative z-20">
+          <h3 className="text-base md:text-lg font-bold text-white mb-1 md:mb-2">{project.name}</h3>
+          {showDescription && (
+            <p className="text-sm text-white/80 hidden md:block mb-3 line-clamp-2">{project.description}</p>
+          )}
+
+          <div className="flex gap-2 mt-2">
+            <motion.button
+              onClick={onViewDetails}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-1 px-3 py-1.5 md:py-2 bg-accent text-white rounded-lg font-medium text-center text-xs md:text-sm hover:bg-accent/80 transition-colors"
+            >
+              View Details
+            </motion.button>
+            <motion.a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-1 px-3 py-1.5 md:py-2 border-2 border-accent text-accent rounded-lg font-medium text-center text-xs md:text-sm hover:bg-accent hover:text-white transition-colors"
+            >
+              Visit Live
+            </motion.a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-/* Mobile project card (includes download dropdown) */
+/* Mobile project card (unchanged layout but tidy) */
 const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescription = false }) => (
-  <div className="group bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 w-full border border-white/20">
-    <div className="flex h-56 md:h-[370px]">
+  <div className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 w-full border border-white/10">
+    <div className="flex h-60 md:h-[370px]">
       {/* Left Side - Image */}
       <div className="w-2/5 md:w-2/5 relative overflow-hidden bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center p-3 md:p-5">
         <div className="relative w-full h-full flex items-center justify-center">
           <img
             src={project.image}
             alt={project.name}
-            className="w-full h-[90%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-[94%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       </div>
@@ -391,7 +413,7 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
                 >
                   <motion.a
                     href={project.apkUrl}
-                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
                     className="flex items-center justify-between px-3 md:px-4 py-2 md:py-2.5 text-white hover:text-accent transition-colors border-b border-white/10"
                   >
                     <span className="text-xs md:text-sm font-medium">APK File</span>
@@ -401,7 +423,7 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
                     href={project.playStoreUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
                     className="flex items-center justify-between px-3 md:px-4 py-2 md:py-2.5 text-white hover:text-accent transition-colors"
                   >
                     <span className="text-xs md:text-sm font-medium">Play Store</span>
@@ -515,7 +537,6 @@ const ProjectsPage = () => {
               <span className="md:hidden">Projects that blend creativity with functionality for real-world impact.</span>
             </motion.p>
 
-            {/* Tab Switcher */}
             <motion.div
               variants={fadeIn("right", 0.5)}
               initial="hidden"
@@ -605,7 +626,7 @@ const ProjectsPage = () => {
                   ))}
                   
                   {/* Desktop view - only current slide */}
-                  <div className="hidden md:block">
+                  <div className="hidden md:block w-full">
                     <motion.div
                       key={`${activeTab}-${currentIndex}`}
                       initial={{ opacity: 0 }}
