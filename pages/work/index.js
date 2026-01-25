@@ -20,7 +20,7 @@ const portfolioData = {
       description: 'Music discovery & playlist experience with clean, immersive UI',
       fullDescription:
         'Wavify is a modern music app centered on discovery, playlists, and effortless listening. Users can explore new releases and curated picks, build and manage personal playlists, and enjoy a minimal, responsive player interface that keeps listening smooth and delightful. Wavify emphasizes curated recommendations, quick access to trending tracks, and a cohesive playback experience across devices.',
-      image: '/Wavify.png',
+      image: '/Wavify2.png',
       liveUrl: 'https://wavify-alpha.vercel.app/'
     },
     {
