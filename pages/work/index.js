@@ -366,7 +366,7 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
           <img
             src={project.image}
             alt={project.name}
-            className="w-full h-[100%] object-[center_35%] lg:object-[center_40%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-[100%] object-[center_30%] lg:object-[center_40%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       </div>
