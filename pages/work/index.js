@@ -23,15 +23,15 @@ const portfolioData = {
       image: '/Wavify2.png',
       liveUrl: 'https://wavify-alpha.vercel.app/'
     },
-    {
-      id: 3,
-      name: 'Movie Landing Page',
-      description: 'Cinematic landing page for showcasing movies, trailers and posters',
-      fullDescription:
-        'Movie Landing Page is a visually-driven film showcase focused on beautiful poster-first layouts, hero carousels, and sleek metadata cards. It helps visitors discover films, watch trailers, and explore cast/genre information in a gallery-like experience designed to highlight visual assets and drive engagement. Perfect for movie promos, festival lineups, or streaming previews.',
-      image: '/Movies.png',
-      liveUrl: 'https://moviebox-yo7e.onrender.com/'
-    }
+    // {
+    //   id: 3,
+    //   name: 'Movie Landing Page',
+    //   description: 'Cinematic landing page for showcasing movies, trailers and posters',
+    //   fullDescription:
+    //     'Movie Landing Page is a visually-driven film showcase focused on beautiful poster-first layouts, hero carousels, and sleek metadata cards. It helps visitors discover films, watch trailers, and explore cast/genre information in a gallery-like experience designed to highlight visual assets and drive engagement. Perfect for movie promos, festival lineups, or streaming previews.',
+    //   image: '/Movies.png',
+    //   liveUrl: 'https://moviebox-yo7e.onrender.com/'
+    // }
   ],
   mobile: [
     {
@@ -41,7 +41,7 @@ const portfolioData = {
       fullDescription:
         'Chattr is a real-time social media experience where users can create posts, follow friends, maintain profiles, and message each other instantly. The app includes push notifications for new messages and interactions, clean feed and profile views, and a fast messaging flow so conversations stay snappy and engaging.',
       image: '/chattr2.jpg',
-      apkUrl: 'https://github.com/Femik84/Projects/releases/download/V1.0.0/application-f5d89495-c695-4dcc-ab5c-84f20c5369d2.apk',
+      apkUrl: 'https://pub-77bd1bed47ae42bc8acaac50a411c9ef.r2.dev/Chattr.apk',
       playStoreUrl: 'https://play.google.com/store/apps/details?id=com.femik.chattr'
     },
     {
@@ -51,8 +51,8 @@ const portfolioData = {
       fullDescription:
         'Ledgerly helps users create budgets, record and categorize expenses, and visualize spending trends with clear charts and statistics. It provides budget alerts and notifications tied to spending thresholds, helping users stay on track financially with insightful summaries and easy transaction entry.',
       image: '/ledgerly2.jpg',
-      apkUrl: 'https://github.com/Femik84/Ledgerly-Release/releases/download/V1.0.0/Ledgerly.apk',
-      playStoreUrl: '#' // no Play Store release available
+      apkUrl: 'https://pub-77bd1bed47ae42bc8acaac50a411c9ef.r2.dev/Ledgerly.apk',
+      playStoreUrl: '' // Play Store removed — APK-only distribution
     },
     {
       id: 3,
@@ -61,7 +61,7 @@ const portfolioData = {
       fullDescription:
         'FastCart is a streamlined e‑commerce app focused on gadgets and electronics. Users can browse products, search for items, complete secure Stripe-powered checkouts, and view order details and status updates. FastCart emphasizes quick product discovery, clear order flows, and easy post-purchase tracking.',
       image: '/FastCart.jpg',
-      apkUrl: 'https://github.com/Femik84/Fast-art-Release-/releases/download/V1.0.0/FastCart.apk',
+      apkUrl: 'https://pub-77bd1bed47ae42bc8acaac50a411c9ef.r2.dev/FastCart.apk',
       playStoreUrl: 'https://play.google.com/store/apps/details?id=com.ayo234.Fastcart_'
     }
   ]
@@ -121,7 +121,6 @@ const fadeIn = (direction, delay) => ({
   },
 });
 
-/* Project Details Modal */
 /* Project Details Modal */
 const ProjectModal = ({ project, isOpen, onClose, type }) => {
   if (!isOpen || !project) return null;
@@ -212,16 +211,18 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                       >
                         Download APK
                       </motion.a>
-                      <motion.a
-                        href={project.playStoreUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex-1 px-4 py-2.5 bg-white/10 border-2 border-white/30 text-white rounded-lg font-semibold text-sm hover:border-accent hover:bg-accent/20 transition-colors text-center"
-                      >
-                        Play Store
-                      </motion.a>
+                      {project.playStoreUrl && project.playStoreUrl !== '' && (
+                        <motion.a
+                          href={project.playStoreUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex-1 px-4 py-2.5 bg-white/10 border-2 border-white/30 text-white rounded-lg font-semibold text-sm hover:border-accent hover:bg-accent/20 transition-colors text-center"
+                        >
+                          Play Store
+                        </motion.a>
+                      )}
                     </>
                   )}
                 </div>
@@ -324,16 +325,18 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                             >
                               Download APK
                             </motion.a>
-                            <motion.a
-                              href={project.playStoreUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              whileHover={{ scale: 1.03 }}
-                              whileTap={{ scale: 0.98 }}
-                              className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
-                            >
-                              Play Store
-                            </motion.a>
+                            {project.playStoreUrl && project.playStoreUrl !== '' && (
+                              <motion.a
+                                href={project.playStoreUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
+                              >
+                                Play Store
+                              </motion.a>
+                            )}
                           </>
                         )}
                       </div>
@@ -471,16 +474,18 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
                     <span className="text-xs md:text-sm font-medium">APK File</span>
                     <span className="text-lg">📦</span>
                   </motion.a>
-                  <motion.a
-                    href={project.playStoreUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
-                    className="flex items-center justify-between px-3 md:px-4 py-2 md:py-2.5 text-white hover:text-accent transition-colors"
-                  >
-                    <span className="text-xs md:text-sm font-medium">Play Store</span>
-                    <span className="text-lg">▶️</span>
-                  </motion.a>
+                  {project.playStoreUrl && project.playStoreUrl !== '' && (
+                    <motion.a
+                      href={project.playStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
+                      className="flex items-center justify-between px-3 md:px-4 py-2 md:py-2.5 text-white hover:text-accent transition-colors"
+                    >
+                      <span className="text-xs md:text-sm font-medium">Play Store</span>
+                      <span className="text-lg">▶️</span>
+                    </motion.a>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
