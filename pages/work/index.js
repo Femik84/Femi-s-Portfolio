@@ -40,7 +40,7 @@ const portfolioData = {
       description: 'Social media app to post, follow, message and get instant notifications',
       fullDescription:
         'Chattr is a real-time social media experience where users can create posts, follow friends, maintain profiles, and message each other instantly. The app includes push notifications for new messages and interactions, clean feed and profile views, and a fast messaging flow so conversations stay snappy and engaging.',
-      image: '/chattr.jpg',
+      image: '/chattr2.jpg',
       apkUrl: 'https://github.com/Femik84/Projects/releases/download/V1.0.0/application-f5d89495-c695-4dcc-ab5c-84f20c5369d2.apk',
       playStoreUrl: 'https://play.google.com/store/apps/details?id=com.femik.chattr'
     },
@@ -50,7 +50,7 @@ const portfolioData = {
       description: 'Expense & budget tracker with spending insights and alerts',
       fullDescription:
         'Ledgerly helps users create budgets, record and categorize expenses, and visualize spending trends with clear charts and statistics. It provides budget alerts and notifications tied to spending thresholds, helping users stay on track financially with insightful summaries and easy transaction entry.',
-      image: '/ledgerly.jpg',
+      image: '/ledgerly2.jpg',
       apkUrl: 'https://github.com/Femik84/Ledgerly-Release/releases/download/V1.0.0/Ledgerly.apk',
       playStoreUrl: '#' // no Play Store release available
     },
