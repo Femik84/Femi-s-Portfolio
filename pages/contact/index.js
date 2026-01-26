@@ -47,19 +47,23 @@ const Contact = () => {
     };
 
     try {
+      console.log("Sending to receiver...");
       await emailjs.send(
         "service_w27va0i",
         "template_nu1ti4f",
         templateParams,
         "0ZguZ331NCdgDPrpu",
       );
+      console.log("Receiver email sent successfully");
 
+      console.log("Sending to sender...");
       await emailjs.send(
         "service_w27va0i",
         "template_o8d38ie",
         templateParams,
         "0ZguZ331NCdgDPrpu",
       );
+      console.log("Sender email sent successfully");
 
       setStatus("Message sent successfully!");
       setButtonText("Message sent!");
@@ -75,8 +79,10 @@ const Contact = () => {
         setButtonText("Let's talk");
       }, 2000);
     } catch (error) {
-      console.error("EmailJS Error:", error);
-      setStatus("Something went wrong. Please try again.");
+      console.error("EmailJS Error Details:", error);
+      console.error("Error message:", error.text || error.message);
+      console.error("Error status:", error.status);
+      setStatus(`Error: ${error.text || error.message || "Please try again"}`);
       setButtonText("Let's talk");
     }
 
