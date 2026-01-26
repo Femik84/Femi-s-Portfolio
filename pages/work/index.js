@@ -232,7 +232,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                             <img
                               src={project.image}
                               alt={project.name}
-                              className="w-full h-[420px] sm:h-[420px] md:h-[420px] object-cover"
+                              className="w-full h-[460px] object-[center_13%] sm:h-[460px] md:h-[460px] object-cover"
                             />
                           </div>
                         </div>
