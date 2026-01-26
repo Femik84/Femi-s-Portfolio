@@ -176,7 +176,11 @@ const Contact = () => {
     overflow-hidden
     group
     disabled:opacity-50 disabled:cursor-not-allowed
-    bg-gradient-to-r from-accent to-accent/80
+    text-accent
+    border-2 border-accent
+    bg-transparent
+    hover:bg-accent
+    hover:text-white
     hover:shadow-lg hover:shadow-accent/50
     hover:scale-105
     active:scale-95"
