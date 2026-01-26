@@ -164,7 +164,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                         <img
                           src={project.image}
                           alt={project.name}
-                          className="w-full h-[290px] sm:h-[290px] object-cover"
+                          className="w-full h-[290px] object-[center_20%] sm:h-[290px] object-cover"
                         />
                       </div>
                     </div>
