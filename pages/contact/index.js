@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 // Updated fadeIn variant with slower exit
 const fadeIn = (direction, delay) => ({
   hidden: { opacity: 0, y: direction === "up" ? 40 : -40 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { delay, duration: 0.5 } 
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { delay, duration: 0.5 },
   },
-  exit: { 
-    opacity: 0, 
+  exit: {
+    opacity: 0,
     y: direction === "up" ? 40 : -40,
-    transition: { duration: 0.5 }
-  }
+    transition: { duration: 0.5 },
+  },
 });
 
 const Contact = () => {
@@ -48,23 +48,29 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        'service_w27va0i',
-        'template_nu1ti4f',
+        "service_w27va0i",
+        "template_nu1ti4f",
         templateParams,
-        '0ZguZ331NCdgDPrpu'
+        "0ZguZ331NCdgDPrpu",
       );
 
       await emailjs.send(
-        'service_w27va0i',
-        'template_o8d38ie',
+        "service_w27va0i",
+        "template_o8d38ie",
         templateParams,
-        '0ZguZ331NCdgDPrpu'
+        "0ZguZ331NCdgDPrpu",
       );
 
       setStatus("Message sent successfully!");
       setButtonText("Message sent!");
-      setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" });
-      
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
       setTimeout(() => {
         setButtonText("Let's talk");
       }, 2000);
@@ -82,7 +88,6 @@ const Contact = () => {
   };
 
   return (
-    // Reduced top/bottom padding on mobile (base) and keep larger spacing on md+
     <div className="h-full bg-primary/30">
       <div className="container mx-auto pt-4 py-8 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
         <div className="flex flex-col w-full max-w-[700px]">
@@ -154,38 +159,38 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               placeholder="Your Message"
-              className="textarea w-full h-36 bg-transparent border border-white/20 rounded-lg px-6 py-3 text-white placeholder:text-white/60 focus:border-accent outline-none transition-all resize-none"
+              className="textarea w-full h-28 bg-transparent border border-white/20 rounded-lg px-6 py-3 text-white placeholder:text-white/60 focus:border-accent outline-none transition-all resize-none"
               required
               disabled={isSending}
             />
-<button
-  type="submit"
-  className="btn rounded-full border border-white/50
-    h-10 sm:h-auto lg:h-auto
-    w-[100px] sm:w-[100px] lg:w-[170px]
-    px-2 sm:px-3 lg:px-5
-    py-0 sm:py-2 lg:py-3
+            
+            <button
+              type="submit"
+              className="btn relative rounded-full 
+    h-12 sm:h-14
+    w-full sm:w-[180px]
+    px-8
+    font-medium text-base
     transition-all duration-300
-    flex items-center justify-center
-    overflow-hidden hover:border-accent
-    group relative
-    disabled:opacity-60 disabled:cursor-not-allowed
-    bg-transparent hover:bg-accent/10"
-  disabled={isSending}
->
-
-              <span
-                className={
-                  isSending
-                    ? "transition-all duration-500"
-                    : "group-hover:translate-y-[120%] group-hover:opacity-0 transition-all duration-500"
-                }
-              >
+    flex items-center justify-center gap-2
+    overflow-hidden
+    group
+    disabled:opacity-50 disabled:cursor-not-allowed
+    bg-gradient-to-r from-accent to-accent/80
+    hover:shadow-lg hover:shadow-accent/50
+    hover:scale-105
+    active:scale-95"
+              disabled={isSending}
+            >
+              <span className="relative z-10 font-semibold tracking-wide">
                 {buttonText}
               </span>
               {!isSending && (
-                <BsArrowRight className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]" />
+                <BsArrowRight className="relative z-10 text-xl group-hover:translate-x-1 transition-transform duration-300" />
               )}
+              
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-white/20 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             </button>
 
             {status && (
