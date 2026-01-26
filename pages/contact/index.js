@@ -158,12 +158,22 @@ const Contact = () => {
               required
               disabled={isSending}
             />
+<button
+  type="submit"
+  className="btn rounded-full border border-white/50
+    h-10 sm:h-auto lg:h-auto
+    w-[100px] sm:w-[100px] lg:w-[170px]
+    px-2 sm:px-3 lg:px-5
+    py-0 sm:py-2 lg:py-3
+    transition-all duration-300
+    flex items-center justify-center
+    overflow-hidden hover:border-accent
+    group relative
+    disabled:opacity-60 disabled:cursor-not-allowed
+    bg-transparent hover:bg-accent/10"
+  disabled={isSending}
+>
 
-            <button
-              type="submit"
-              className="btn rounded-full border border-white/50 w-[100px] sm:w-[100px] lg:w-[170px] px-2 sm:px-3 lg:px-5 py-2 lg:py-3 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative disabled:opacity-60 disabled:cursor-not-allowed bg-transparent hover:bg-accent/10"
-              disabled={isSending}
-            >
               <span
                 className={
                   isSending
