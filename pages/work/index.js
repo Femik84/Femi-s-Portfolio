@@ -122,8 +122,14 @@ const fadeIn = (direction, delay) => ({
 });
 
 /* Project Details Modal */
+/* Project Details Modal */
 const ProjectModal = ({ project, isOpen, onClose, type }) => {
   if (!isOpen || !project) return null;
+
+  // For "web" projects on larger screens we want a narrower modal.
+  // Keep all other sizes / types unchanged.
+  const modalMaxClass =
+    type === 'web' ? 'max-w-full md:max-w-[700px]' : 'max-w-5xl';
 
   return (
     <AnimatePresence>
@@ -140,7 +146,8 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative bg-gradient-to-br from-[#0f1724] to-[#071029] rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-white/10 shadow-2xl"
+            // Apply the conditional max-width class here. On small screens the modal remains full width.
+            className={`relative bg-gradient-to-br from-[#0f1724] to-[#071029] rounded-3xl ${modalMaxClass} w-full max-h-[90vh] overflow-hidden border border-white/10 shadow-2xl`}
             onClick={(e) => e.stopPropagation()}
           >
             <motion.button
@@ -222,75 +229,117 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
 
               {/* Desktop Layout */}
               <div className="hidden md:flex gap-8">
-                {/* Left Side - If mobile project show phone mock on left; otherwise show large image */}
-                <div className="w-1/2 flex-shrink-0">
-                  <div className="relative h-full min-h-[420px] rounded-2xl overflow-hidden shadow-2xl sticky top-0">
-                    {type === 'mobile' ? (
-                      <div className="flex items-center justify-center p-6 w-full h-full">
-                        <div className="w-[260px] sm:w-[320px] bg-black/80 rounded-3xl p-3 shadow-xl border border-white/10">
-                          <div className="bg-[#05061a] rounded-2xl overflow-hidden">
-                            <img
-                              src={project.image}
-                              alt={project.name}
-                              className="w-full h-[460px] object-[center_13%] sm:h-[460px] md:h-[460px] object-cover"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <img
-                          src={project.image}
-                          alt={project.name}
-                          className="w-full h-full object-contain"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      </>
-                    )}
-                  </div>
-                </div>
+                {type === 'web' ? (
+                  // Web: slightly smaller centered image at the top, content below (reduced sizes)
+                  <div className="w-full flex flex-col items-center">
+                    <div
+                      className="relative rounded-2xl overflow-hidden shadow-2xl max-w-[640px] w-full mx-auto"
+                      style={{ aspectRatio: '1334/634', maxWidth: '640px', maxHeight: '320px' }}
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-contain block"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                    </div>
 
-                {/* Right Side - Details */}
-                <div className="w-1/2 flex flex-col">
-                  <h2 className="text-4xl font-bold text-white mb-4">{project.name}</h2>
-                  <p className="text-white/80 text-lg leading-relaxed mb-6">{project.fullDescription}</p>
+                    <div className="mt-4 flex flex-col max-w-[640px] w-full mx-auto px-4">
+                      <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                        {project.name}
+                      </h2>
+                      <p className="text-white/80 text-sm leading-relaxed mb-4">
+                        {project.fullDescription}
+                      </p>
 
-                  <div className="flex flex-wrap gap-3 mt-auto">
-                    {type === 'web' ? (
-                      <motion.a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
-                      >
-                        Visit Live Site
-                      </motion.a>
-                    ) : (
-                      <>
+                      <div className="flex flex-wrap gap-3 mt-auto">
                         <motion.a
-                          href={project.apkUrl}
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
-                        >
-                          Download APK
-                        </motion.a>
-                        <motion.a
-                          href={project.playStoreUrl}
+                          href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.98 }}
-                          className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
+                          className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
                         >
-                          Play Store
+                          Visit Live Site
                         </motion.a>
-                      </>
-                    )}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  // Mobile / other types: keep original two-column UI exactly as before
+                  <>
+                    {/* Left Side - If mobile project show phone mock on left; otherwise show large image */}
+                    <div className="w-1/2 flex-shrink-0">
+                      <div className="relative h-full min-h-[420px] rounded-2xl overflow-hidden shadow-2xl top-0">
+                        {type === 'mobile' ? (
+                          <div className="flex items-center justify-center p-6 w-full h-full">
+                            <div className="w-[260px] sm:w-[320px] bg-black/80 rounded-3xl p-3 shadow-xl border border-white/10">
+                              <div className="bg-[#05061a] rounded-2xl overflow-hidden">
+                                <img
+                                  src={project.image}
+                                  alt={project.name}
+                                  className="w-full h-[460px] object-[center_13%] sm:h-[460px] md:h-[460px] object-cover"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <>
+                            <img
+                              src={project.image}
+                              alt={project.name}
+                              className="w-full h-[260px] object-contain"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Right Side - Details */}
+                    <div className="w-1/2 flex flex-col">
+                      <h2 className="text-4xl font-bold text-white mb-4">{project.name}</h2>
+                      <p className="text-white/80 text-lg leading-relaxed mb-6">{project.fullDescription}</p>
+
+                      <div className="flex flex-wrap gap-3 mt-auto">
+                        {type === 'web' ? (
+                          <motion.a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                          >
+                            Visit Live Site
+                          </motion.a>
+                        ) : (
+                          <>
+                            <motion.a
+                              href={project.apkUrl}
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                            >
+                              Download APK
+                            </motion.a>
+                            <motion.a
+                              href={project.playStoreUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
+                            >
+                              Play Store
+                            </motion.a>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 

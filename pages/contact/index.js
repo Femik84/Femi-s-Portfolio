@@ -82,8 +82,9 @@ const Contact = () => {
   };
 
   return (
+    // Reduced top/bottom padding on mobile (base) and keep larger spacing on md+
     <div className="h-full bg-primary/30">
-      <div className="container mx-auto pt-8 py-16 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
+      <div className="container mx-auto pt-4 py-8 md:py-32 px-4 xl:text-left flex items-center justify-center h-full">
         <div className="flex flex-col w-full max-w-[700px]">
           <motion.h2
             variants={fadeIn("up", 0.2)}
@@ -160,7 +161,7 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="btn rounded-full border border-white/50 w-[120px] lg:w-[170px] px-2 lg:px-5 lg:py-3 py-1 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative disabled:opacity-60 disabled:cursor-not-allowed bg-transparent hover:bg-accent/10"
+              className="btn rounded-full border border-white/50 w-[100px] sm:w-[100px] lg:w-[170px] px-2 sm:px-3 lg:px-5 py-2 lg:py-3 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group relative disabled:opacity-60 disabled:cursor-not-allowed bg-transparent hover:bg-accent/10"
               disabled={isSending}
             >
               <span
