@@ -18,7 +18,7 @@ const Home = () => {
 
   // CV remote URL
   const CV_URL =
-    "https://pub-77bd1bed47ae42bc8acaac50a411c9ef.r2.dev/Kayode%20Femi-CV.pdf";
+    "https://pub-77bd1bed47ae42bc8acaac50a411c9ef.r2.dev/KayodeFemi.docx";
 
   // Download function using blob method (forces download)
   const downloadCv = async (e) => {

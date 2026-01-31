@@ -10,14 +10,14 @@ const testimonialData = [
   },
   {
     image: "/t-avt-2.png",
-    name: "Jane Doe",
+    name: "Esther Howard",
     position: "Customer",
     message:
       "He delivered beyond expectations. Communication was clear and the project was completed ahead of schedule. ",
   },
   {
     image: "/t-avt-3.png",
-    name: "Jhon Doe",
+    name: "James Lase",
     position: "Customer",
     message:
       "Working with him was great. He understood our vision quickly and turned it into a functional product. Truly exceptional talent.",
