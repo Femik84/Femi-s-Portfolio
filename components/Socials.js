@@ -22,7 +22,7 @@ const Socials = () => {
       </Link>
 
       <Link
-        href="https://wa.me/2347051342759"
+        href="https://wa.me/2349163046540"
         className="hover:text-accent transition-all duration-300"
         target="_blank"
       >
@@ -38,7 +38,7 @@ const Socials = () => {
       </Link>
 
       <Link
-        href="https://instagram.com/F_emmy_k"
+        href="https://instagram.com/F_emi_k"
         className="hover:text-accent transition-all duration-300"
         target="_blank"
       >
@@ -46,7 +46,7 @@ const Socials = () => {
       </Link>
 
       <Link
-        href="https://linkedin.com/in/your-username"
+        href="https://www.linkedin.com/in/femi-kayode-96ab123a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
         className="hover:text-accent transition-all duration-300"
         target="_blank"
       >
