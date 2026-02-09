@@ -23,15 +23,6 @@ const portfolioData = {
       image: '/Wavify2.png',
       liveUrl: 'https://wavify-alpha.vercel.app/'
     },
-    // {
-    //   id: 3,
-    //   name: 'Movie Landing Page',
-    //   description: 'Cinematic landing page for showcasing movies, trailers and posters',
-    //   fullDescription:
-    //     'Movie Landing Page is a visually-driven film showcase focused on beautiful poster-first layouts, hero carousels, and sleek metadata cards. It helps visitors discover films, watch trailers, and explore cast/genre information in a gallery-like experience designed to highlight visual assets and drive engagement. Perfect for movie promos, festival lineups, or streaming previews.',
-    //   image: '/Movies.png',
-    //   liveUrl: 'https://moviebox-yo7e.onrender.com/'
-    // }
   ],
   mobile: [
     {
@@ -52,7 +43,7 @@ const portfolioData = {
         'Ledgerly helps users create budgets, record and categorize expenses, and visualize spending trends with clear charts and statistics. It provides budget alerts and notifications tied to spending thresholds, helping users stay on track financially with insightful summaries and easy transaction entry.',
       image: '/ledgerly2.jpg',
       apkUrl: 'https://pub-77bd1bed47ae42bc8acaac50a411c9ef.r2.dev/Ledgerly.apk',
-      playStoreUrl: '' // Play Store removed — APK-only distribution
+      playStoreUrl: ''
     },
     {
       id: 3,
@@ -125,8 +116,6 @@ const fadeIn = (direction, delay) => ({
 const ProjectModal = ({ project, isOpen, onClose, type }) => {
   if (!isOpen || !project) return null;
 
-  // For "web" projects on larger screens we want a narrower modal.
-  // Keep all other sizes / types unchanged.
   const modalMaxClass =
     type === 'web' ? 'max-w-full md:max-w-[700px]' : 'max-w-5xl';
 
@@ -137,7 +126,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 short:p-2 bg-black/80 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
@@ -145,38 +134,35 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            // Apply the conditional max-width class here. On small screens the modal remains full width.
-            className={`relative bg-gradient-to-br from-[#0f1724] to-[#071029] rounded-3xl ${modalMaxClass} w-full max-h-[90vh] overflow-hidden border border-white/10 shadow-2xl`}
+            className={`relative bg-gradient-to-br from-[#0f1724] to-[#071029] rounded-3xl short:rounded-2xl ${modalMaxClass} w-full max-h-[90vh] overflow-hidden border border-white/10 shadow-2xl`}
             onClick={(e) => e.stopPropagation()}
           >
             <motion.button
               whileHover={{ scale: 1.05, rotate: 90 }}
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
-              className="absolute top-4 right-4 z-20 p-2 bg-black/60 rounded-full text-white hover:bg-black transition-all shadow-lg"
+              className="absolute top-4 short:top-3 right-4 short:right-3 z-20 p-2 short:p-1.5 bg-black/60 rounded-full text-white hover:bg-black transition-all shadow-lg"
             >
-              <X size={22} />
+              <X size={22} className="short:w-5 short:h-5" />
             </motion.button>
 
-            <div className="overflow-y-auto max-h-[90vh] p-4 md:p-8 scrollbar-hide">
+            <div className="overflow-y-auto max-h-[90vh] p-4 short:p-3 md:p-8 short:md:p-6 scrollbar-hide">
               {/* Mobile Layout */}
               <div className="md:hidden">
-                {/* If mobile project: show phone mock; else use full-width image */}
                 {type === 'mobile' ? (
-                  <div className="flex justify-center mb-4">
-                    {/* Phone mock frame */}
-                    <div className="w-44 sm:w-52 md:w-60 bg-black/80 rounded-3xl p-2 shadow-2xl border border-white/10">
-                      <div className="bg-[#05061a] rounded-2xl overflow-hidden">
+                  <div className="flex justify-center mb-4 short:mb-3">
+                    <div className="w-44 short:w-40 sm:w-52 md:w-60 bg-black/80 rounded-3xl short:rounded-2xl p-2 short:p-1.5 shadow-2xl border border-white/10">
+                      <div className="bg-[#05061a] rounded-2xl short:rounded-xl overflow-hidden">
                         <img
                           src={project.image}
                           alt={project.name}
-                          className="w-full h-[290px] object-[center_20%] sm:h-[290px] object-cover"
+                          className="w-full h-[290px] short:h-[240px] object-[center_20%] sm:h-[290px] object-cover"
                         />
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="relative h-36 rounded-xl overflow-hidden mb-4 shadow-2xl">
+                  <div className="relative h-36 short:h-28 rounded-xl short:rounded-lg overflow-hidden mb-4 short:mb-3 shadow-2xl">
                     <img
                       src={project.image}
                       alt={project.name}
@@ -186,10 +172,10 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                   </div>
                 )}
 
-                <h2 className="text-2xl font-bold text-white mb-3">{project.name}</h2>
-                <p className="text-white/80 text-sm leading-relaxed mb-5">{project.fullDescription}</p>
+                <h2 className="text-2xl short:text-xl font-bold text-white mb-3 short:mb-2">{project.name}</h2>
+                <p className="text-white/80 text-sm short:text-xs leading-relaxed mb-5 short:mb-4">{project.fullDescription}</p>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 short:gap-1.5">
                   {type === 'web' ? (
                     <motion.a
                       href={project.liveUrl}
@@ -197,7 +183,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 px-4 py-2.5 bg-accent text-white rounded-lg font-semibold text-sm hover:bg-accent/80 transition-colors shadow-lg text-center"
+                      className="flex-1 px-4 short:px-3 py-2.5 short:py-2 bg-accent text-white rounded-lg short:rounded-md font-semibold text-sm short:text-xs hover:bg-accent/80 transition-colors shadow-lg text-center"
                     >
                       Visit Live Site
                     </motion.a>
@@ -207,7 +193,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                         href={project.apkUrl}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.98 }}
-                        className="flex-1 px-4 py-2.5 bg-accent text-white rounded-lg font-semibold text-sm hover:bg-accent/80 transition-colors shadow-lg text-center"
+                        className="flex-1 px-4 short:px-3 py-2.5 short:py-2 bg-accent text-white rounded-lg short:rounded-md font-semibold text-sm short:text-xs hover:bg-accent/80 transition-colors shadow-lg text-center"
                       >
                         Download APK
                       </motion.a>
@@ -218,7 +204,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.98 }}
-                          className="flex-1 px-4 py-2.5 bg-white/10 border-2 border-white/30 text-white rounded-lg font-semibold text-sm hover:border-accent hover:bg-accent/20 transition-colors text-center"
+                          className="flex-1 px-4 short:px-3 py-2.5 short:py-2 bg-white/10 border-2 border-white/30 text-white rounded-lg short:rounded-md font-semibold text-sm short:text-xs hover:border-accent hover:bg-accent/20 transition-colors text-center"
                         >
                           Play Store
                         </motion.a>
@@ -229,12 +215,11 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden md:flex gap-8">
+              <div className="hidden md:flex gap-8 short:gap-6">
                 {type === 'web' ? (
-                  // Web: slightly smaller centered image at the top, content below (reduced sizes)
                   <div className="w-full flex flex-col items-center">
                     <div
-                      className="relative rounded-2xl overflow-hidden shadow-2xl max-w-[640px] w-full mx-auto"
+                      className="relative rounded-2xl short:rounded-xl overflow-hidden shadow-2xl max-w-[640px] w-full mx-auto"
                       style={{ aspectRatio: '1334/634', maxWidth: '640px', maxHeight: '320px' }}
                     >
                       <img
@@ -245,22 +230,22 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                     </div>
 
-                    <div className="mt-4 flex flex-col max-w-[640px] w-full mx-auto px-4">
-                      <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                    <div className="mt-4 short:mt-3 flex flex-col max-w-[640px] w-full mx-auto px-4 short:px-3">
+                      <h2 className="text-xl short:text-lg sm:text-2xl font-bold text-white mb-2 short:mb-1.5">
                         {project.name}
                       </h2>
-                      <p className="text-white/80 text-sm leading-relaxed mb-4">
+                      <p className="text-white/80 text-sm short:text-xs leading-relaxed mb-4 short:mb-3">
                         {project.fullDescription}
                       </p>
 
-                      <div className="flex flex-wrap gap-3 mt-auto">
+                      <div className="flex flex-wrap gap-3 short:gap-2 mt-auto">
                         <motion.a
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.03 }}
                           whileTap={{ scale: 0.98 }}
-                          className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                          className="px-6 short:px-4 py-3 short:py-2 bg-accent text-white rounded-xl short:rounded-lg font-semibold text-sm short:text-xs hover:bg-accent/80 transition-colors shadow-lg"
                         >
                           Visit Live Site
                         </motion.a>
@@ -268,19 +253,17 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                     </div>
                   </div>
                 ) : (
-                  // Mobile / other types: keep original two-column UI exactly as before
                   <>
-                    {/* Left Side - If mobile project show phone mock on left; otherwise show large image */}
                     <div className="w-1/2 flex-shrink-0">
-                      <div className="relative h-full min-h-[420px] rounded-2xl overflow-hidden shadow-2xl top-0">
+                      <div className="relative h-full min-h-[420px] short:min-h-[340px] rounded-2xl short:rounded-xl overflow-hidden shadow-2xl top-0">
                         {type === 'mobile' ? (
-                          <div className="flex items-center justify-center p-6 w-full h-full">
-                            <div className="w-[260px] sm:w-[320px] bg-black/80 rounded-3xl p-3 shadow-xl border border-white/10">
-                              <div className="bg-[#05061a] rounded-2xl overflow-hidden">
+                          <div className="flex items-center justify-center p-6 short:p-4 w-full h-full">
+                            <div className="w-[260px] short:w-[220px] sm:w-[320px] bg-black/80 rounded-3xl short:rounded-2xl p-3 short:p-2 shadow-xl border border-white/10">
+                              <div className="bg-[#05061a] rounded-2xl short:rounded-xl overflow-hidden">
                                 <img
                                   src={project.image}
                                   alt={project.name}
-                                  className="w-full h-[460px] object-[center_13%] sm:h-[460px] md:h-[460px] object-cover"
+                                  className="w-full h-[460px] short:h-[380px] object-[center_13%] sm:h-[460px] md:h-[460px] object-cover"
                                 />
                               </div>
                             </div>
@@ -290,7 +273,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                             <img
                               src={project.image}
                               alt={project.name}
-                              className="w-full h-[260px] object-contain"
+                              className="w-full h-[260px] short:h-[220px] object-contain"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                           </>
@@ -298,12 +281,11 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                       </div>
                     </div>
 
-                    {/* Right Side - Details */}
                     <div className="w-1/2 flex flex-col">
-                      <h2 className="text-4xl font-bold text-white mb-4">{project.name}</h2>
-                      <p className="text-white/80 text-lg leading-relaxed mb-6">{project.fullDescription}</p>
+                      <h2 className="text-4xl short:text-3xl font-bold text-white mb-4 short:mb-3">{project.name}</h2>
+                      <p className="text-white/80 text-lg short:text-base leading-relaxed mb-6 short:mb-4">{project.fullDescription}</p>
 
-                      <div className="flex flex-wrap gap-3 mt-auto">
+                      <div className="flex flex-wrap gap-3 short:gap-2 mt-auto">
                         {type === 'web' ? (
                           <motion.a
                             href={project.liveUrl}
@@ -311,7 +293,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                             rel="noopener noreferrer"
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.98 }}
-                            className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                            className="px-6 short:px-4 py-3 short:py-2 bg-accent text-white rounded-xl short:rounded-lg font-semibold text-sm short:text-xs hover:bg-accent/80 transition-colors shadow-lg"
                           >
                             Visit Live Site
                           </motion.a>
@@ -321,7 +303,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                               href={project.apkUrl}
                               whileHover={{ scale: 1.03 }}
                               whileTap={{ scale: 0.98 }}
-                              className="px-6 py-3 bg-accent text-white rounded-xl font-semibold hover:bg-accent/80 transition-colors shadow-lg"
+                              className="px-6 short:px-4 py-3 short:py-2 bg-accent text-white rounded-xl short:rounded-lg font-semibold text-sm short:text-xs hover:bg-accent/80 transition-colors shadow-lg"
                             >
                               Download APK
                             </motion.a>
@@ -332,7 +314,7 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="px-6 py-3 bg-white/10 border-2 border-white/30 text-white rounded-xl font-semibold hover:border-accent hover:bg-accent/20 transition-colors"
+                                className="px-6 short:px-4 py-3 short:py-2 bg-white/10 border-2 border-white/30 text-white rounded-xl short:rounded-lg font-semibold text-sm short:text-xs hover:border-accent hover:bg-accent/20 transition-colors"
                               >
                                 Play Store
                               </motion.a>
@@ -357,37 +339,33 @@ const ProjectModal = ({ project, isOpen, onClose, type }) => {
   );
 };
 
-/* Web project card - image fills whole card, content overlays with gradient under text */
+/* Web project card */
 const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => {
   return (
-    <div className="relative rounded-2xl overflow-hidden shadow-lg border border-white/10 w-full h-[245px] md:h-64 lg:h-[350px] ">
-      {/* Background image fills entire card */}
-     <img
-  src={project.image}
-  alt={project.name}
-  className="absolute top-[-42px] lg:top-[-54px] left-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-/>
+    <div className="relative rounded-2xl short:rounded-xl overflow-hidden shadow-lg border border-white/10 w-full h-[245px] short:h-[200px] md:h-64 short:md:h-56 lg:h-[350px] short:lg:h-[300px]">
+      <img
+        src={project.image}
+        alt={project.name}
+        className="absolute top-[-42px] short:top-[-36px] lg:top-[-54px] short:lg:top-[-46px] left-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+      />
 
-      {/* dark gradient overlay to ensure contrast */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent" />
 
-      {/* Content container sits on top */}
-      <div className="absolute left-0 right-0 bottom-0 p-4 md:p-5 z-10">
-        {/* subtle frosted bar (overlay under the text) */}
-        <div className="absolute left-4 right-4 -bottom-2 h-24 rounded-t-xl bg-black/40 blur-sm pointer-events-none" />
+      <div className="absolute left-0 right-0 bottom-0 p-4 short:p-3 md:p-5 short:md:p-4 z-10">
+        <div className="absolute left-4 short:left-3 right-4 short:right-3 -bottom-2 h-24 short:h-20 rounded-t-xl short:rounded-t-lg bg-black/40 blur-sm pointer-events-none" />
 
         <div className="relative z-20">
-          <h3 className="text-base md:text-lg font-bold text-white mb-1 md:mb-2">{project.name}</h3>
+          <h3 className="text-base short:text-sm md:text-lg short:md:text-base font-bold text-white mb-1 short:mb-0.5 md:mb-2 short:md:mb-1.5">{project.name}</h3>
           {showDescription && (
-            <p className="text-sm text-white/80 hidden md:block mb-3 line-clamp-2">{project.description}</p>
+            <p className="text-sm short:text-xs text-white/80 hidden md:block mb-3 short:mb-2 line-clamp-2">{project.description}</p>
           )}
 
-          <div className="flex gap-2 mt-2">
+          <div className="flex gap-2 short:gap-1.5 mt-2 short:mt-1.5">
             <motion.button
               onClick={onViewDetails}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="flex-1 px-3 py-1.5 md:py-2 bg-accent text-white rounded-lg font-medium text-center text-xs md:text-sm hover:bg-accent/80 transition-colors"
+              className="flex-1 px-3 short:px-2 py-1.5 short:py-1 md:py-2 short:md:py-1.5 bg-accent text-white rounded-lg short:rounded-md font-medium text-center text-xs short:text-[10px] md:text-sm short:md:text-xs hover:bg-accent/80 transition-colors"
             >
               View Details
             </motion.button>
@@ -397,7 +375,7 @@ const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => 
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="flex-1 px-3 py-1.5 md:py-2 border-2 border-accent text-accent rounded-lg font-medium text-center text-xs md:text-sm hover:bg-accent hover:text-white transition-colors"
+              className="flex-1 px-3 short:px-2 py-1.5 short:py-1 md:py-2 short:md:py-1.5 border-2 border-accent text-accent rounded-lg short:rounded-md font-medium text-center text-xs short:text-[10px] md:text-sm short:md:text-xs hover:bg-accent hover:text-white transition-colors"
             >
               Visit Live
             </motion.a>
@@ -408,52 +386,49 @@ const WebProjectCard = ({ project, onViewDetails, showDescription = false }) => 
   );
 };
 
-/* Mobile project card (unchanged layout but tidy) */
+/* Mobile project card */
 const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescription = false }) => (
-  <div className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 w-full border border-white/10">
-    <div className="flex h-60 md:h-[370px]">
-      {/* Left Side - Image */}
-      <div className="w-2/5 md:w-2/5 relative overflow-hidden bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center p-3 md:p-5">
+  <div className="group bg-white/5 backdrop-blur-sm rounded-2xl short:rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 w-full border border-white/10">
+    <div className="flex h-60 short:h-56 md:h-[370px] short:md:h-[320px]">
+      <div className="w-2/5 md:w-2/5 relative overflow-hidden bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center p-3 short:p-2 md:p-5 short:md:p-4">
         <div className="relative w-full h-full flex items-center justify-center">
           <img
             src={project.image}
             alt={project.name}
-            className="w-full h-[100%] object-[center_20%] lg:object-[center_40%] object-cover rounded-2xl md:rounded-3xl shadow-xl transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-[100%] object-[center_20%] lg:object-[center_40%] object-cover rounded-2xl short:rounded-xl md:rounded-3xl short:md:rounded-2xl shadow-xl transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       </div>
 
-      {/* Right Side - Details */}
-      <div className="w-3/5 md:w-3/5 p-4 md:p-6 flex flex-col justify-between">
+      <div className="w-3/5 md:w-3/5 p-4 short:p-3 md:p-6 short:md:p-5 flex flex-col justify-between">
         <div>
-          <h3 className="text-sm md:text-lg font-bold text-white mb-1.5 md:mb-2 line-clamp-2">{project.name}</h3>
-          <p className="text-xs md:text-sm text-white/60 md:text-white/70 line-clamp-2 md:line-clamp-3 mb-3 md:mb-4">{project.description}</p>
+          <h3 className="text-sm short:text-xs md:text-lg short:md:text-base font-bold text-white mb-1.5 short:mb-1 md:mb-2 short:md:mb-1.5 line-clamp-2">{project.name}</h3>
+          <p className="text-xs short:text-[10px] md:text-sm short:md:text-xs text-white/60 md:text-white/70 line-clamp-2 md:line-clamp-3 mb-3 short:mb-2 md:mb-4 short:md:mb-3">{project.description}</p>
         </div>
 
-        <div className="flex flex-col gap-1.5 md:gap-2">
+        <div className="flex flex-col gap-1.5 short:gap-1 md:gap-2 short:md:gap-1.5">
           <motion.button
             onClick={onViewDetails}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full px-2.5 md:px-3 py-1.5 md:py-2 bg-accent text-white rounded-lg font-medium text-xs md:text-sm hover:bg-accent/80 transition-colors"
+            className="w-full px-2.5 short:px-2 md:px-3 short:md:px-2.5 py-1.5 short:py-1 md:py-2 short:md:py-1.5 bg-accent text-white rounded-lg short:rounded-md font-medium text-xs short:text-[10px] md:text-sm short:md:text-xs hover:bg-accent/80 transition-colors"
           >
             View Details
           </motion.button>
 
-          {/* Download Button with Dropdown */}
           <div className="relative">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={onToggle}
-              className="w-full px-2.5 md:px-3 py-1.5 md:py-2 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-lg font-medium text-xs md:text-sm hover:border-accent hover:bg-accent/20 transition-colors flex items-center justify-center gap-2"
+              className="w-full px-2.5 short:px-2 md:px-3 short:md:px-2.5 py-1.5 short:py-1 md:py-2 short:md:py-1.5 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-lg short:rounded-md font-medium text-xs short:text-[10px] md:text-sm short:md:text-xs hover:border-accent hover:bg-accent/20 transition-colors flex items-center justify-center gap-2 short:gap-1.5"
             >
               <span>Download</span>
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <ChevronDown size={16} />
+                <ChevronDown size={16} className="short:w-3.5 short:h-3.5" />
               </motion.div>
             </motion.button>
 
@@ -464,15 +439,15 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute bottom-full left-0 right-0 mb-1.5 md:mb-2 bg-[rgb(15,23,42)] backdrop-blur-md border border-white/20 rounded-lg overflow-hidden shadow-xl z-50"
+                  className="absolute bottom-full left-0 right-0 mb-1.5 short:mb-1 md:mb-2 short:md:mb-1.5 bg-[rgb(15,23,42)] backdrop-blur-md border border-white/20 rounded-lg short:rounded-md overflow-hidden shadow-xl z-50"
                 >
                   <motion.a
                     href={project.apkUrl}
                     whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
-                    className="flex items-center justify-between px-3 md:px-4 py-2 md:py-2.5 text-white hover:text-accent transition-colors border-b border-white/10"
+                    className="flex items-center justify-between px-3 short:px-2.5 md:px-4 short:md:px-3 py-2 short:py-1.5 md:py-2.5 short:md:py-2 text-white hover:text-accent transition-colors border-b border-white/10"
                   >
-                    <span className="text-xs md:text-sm font-medium">APK File</span>
-                    <span className="text-lg">📦</span>
+                    <span className="text-xs short:text-[10px] md:text-sm short:md:text-xs font-medium">APK File</span>
+                    <span className="text-lg short:text-base">📦</span>
                   </motion.a>
                   {project.playStoreUrl && project.playStoreUrl !== '' && (
                     <motion.a
@@ -480,10 +455,10 @@ const MobileProjectCard = ({ project, isOpen, onToggle, onViewDetails, showDescr
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
-                      className="flex items-center justify-between px-3 md:px-4 py-2 md:py-2.5 text-white hover:text-accent transition-colors"
+                      className="flex items-center justify-between px-3 short:px-2.5 md:px-4 short:md:px-3 py-2 short:py-1.5 md:py-2.5 short:md:py-2 text-white hover:text-accent transition-colors"
                     >
-                      <span className="text-xs md:text-sm font-medium">Play Store</span>
-                      <span className="text-lg">▶️</span>
+                      <span className="text-xs short:text-[10px] md:text-sm short:md:text-xs font-medium">Play Store</span>
+                      <span className="text-lg short:text-base">▶️</span>
                     </motion.a>
                   )}
                 </motion.div>
@@ -568,18 +543,18 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary/30 md:pt-36 pb-8 md:pb-12 flex items-center relative overflow-hidden">
+    <div className="min-h-screen bg-primary/30 md:pt-36 short:md:pt-28 pb-8 short:pb-6 md:pb-12 short:md:pb-10 flex items-center relative overflow-hidden">
       <Circles />
-      <div className="container mx-auto relative z-20 px-4">
-        <div className="flex flex-col xl:flex-row gap-x-8">
+      <div className="container mx-auto relative z-20 px-4 short:px-3">
+        <div className="flex flex-col xl:flex-row gap-x-8 short:gap-x-6">
           {/* Text Section */}
-          <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 md:mb-8 xl:bottom-10">
+          <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 short:mb-4 md:mb-8 short:md:mb-6 xl:bottom-10 short:xl:bottom-8">
             <motion.h2
               variants={fadeIn("right", 0.3)}
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="h2 xl:mt-8 text-white"
+              className="h2 xl:mt-8 short:xl:mt-6 text-white text-[30px] short:text-[30px] md:text-[32px]"
             >
               Selected <span className="text-accent">Works.</span>
             </motion.h2>
@@ -588,7 +563,7 @@ const ProjectsPage = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="mb-4 md:mb-6 max-w-[400px] mx-auto lg:mx-0 text-white/80 text-sm md:text-base"
+              className="mb-4 short:mb-3 md:mb-6 short:md:mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/80 text-sm short:text-xs md:text-base short:md:text-sm"
             >
               <span className="hidden md:inline">My projects blend creativity and functionality, delivering responsive designs, clean code, smooth performance, and user-centric solutions tailored for real-world impact.</span>
               <span className="md:hidden">Projects that blend creativity with functionality for real-world impact.</span>
@@ -599,12 +574,12 @@ const ProjectsPage = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="flex justify-center lg:justify-start mt-2 md:mt-6"
+              className="flex justify-center lg:justify-start mt-2 short:mt-1 md:mt-6 short:md:mt-4"
             >
-              <div className="inline-flex bg-white/5 backdrop-blur-sm rounded-full p-1.5 shadow-lg border border-white/10">
+              <div className="inline-flex bg-white/5 backdrop-blur-sm rounded-full p-1.5 short:p-1 shadow-lg border border-white/10">
                 <button
                   onClick={() => { setActiveTab('web'); setCurrentIndex(0); }}
-                  className={`relative px-4 md:px-6 py-2 md:py-2.5 rounded-full font-semibold text-xs md:text-sm transition-colors duration-300 ${activeTab === 'web' ? 'text-white' : 'text-white/60 hover:text-white'}`}
+                  className={`relative px-4 short:px-3 md:px-6 short:md:px-5 py-2 short:py-1.5 md:py-2.5 short:md:py-2 rounded-full font-semibold text-xs short:text-[10px] md:text-sm short:md:text-xs transition-colors duration-300 ${activeTab === 'web' ? 'text-white' : 'text-white/60 hover:text-white'}`}
                 >
                   {activeTab === 'web' && (
                     <motion.div
@@ -618,7 +593,7 @@ const ProjectsPage = () => {
 
                 <button
                   onClick={() => { setActiveTab('mobile'); setCurrentIndex(0); }}
-                  className={`relative px-4 md:px-6 py-2 md:py-2.5 rounded-full font-semibold text-xs md:text-sm transition-colors duration-300 ${activeTab === 'mobile' ? 'text-white' : 'text-white/60 hover:text-white'}`}
+                  className={`relative px-4 short:px-3 md:px-6 short:md:px-5 py-2 short:py-1.5 md:py-2.5 short:md:py-2 rounded-full font-semibold text-xs short:text-[10px] md:text-sm short:md:text-xs transition-colors duration-300 ${activeTab === 'mobile' ? 'text-white' : 'text-white/60 hover:text-white'}`}
                 >
                   {activeTab === 'mobile' && (
                     <motion.div
@@ -639,26 +614,26 @@ const ProjectsPage = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="w-full xl:flex-1 flex flex-col items-center"
+            className="w-full xl:flex-1 flex flex-col relative lg:bottom-10  items-center"
           >
-            <div className="relative flex items-center w-full max-w-md md:max-w-lg xl:max-w-lg">
-              {/* Left Navigation Button - Hidden on Mobile */}
+            <div className="relative flex items-center w-full  max-w-md md:max-w-lg xl:max-w-lg">
+              {/* Left Navigation Button */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handlePrev}
-                className="hidden md:block absolute -left-4 xl:-left-20 z-30 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-accent hover:border-accent transition-all duration-300 shadow-lg"
+                className="hidden md:block absolute -left-4 xl:-left-20 short:xl:-left-16 z-30 p-3 short:p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-accent hover:border-accent transition-all duration-300 shadow-lg"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={24} className="short:w-5 short:h-5" />
               </motion.button>
 
-              {/* Projects Container with Horizontal Scroll on Mobile */}
+              {/* Projects Container */}
               <div 
                 ref={scrollContainerRef}
                 onScroll={handleScroll}
-                className="flex-1 overflow-x-auto overflow-y-hidden md:overflow-hidden px-0 md:px-4 xl:px-0 snap-x snap-mandatory scrollbar-hide"
+                className="flex-1 overflow-x-auto overflow-y-hidden md:overflow-hidden px-0 md:px-4 short:md:px-3 xl:px-0 snap-x snap-mandatory scrollbar-hide"
               >
-                <div className="flex md:block gap-4 md:gap-0">
+                <div className="flex md:block gap-4 short:gap-3 md:gap-0">
                   {currentProjects.map((project, index) => (
                     <div 
                       key={`${activeTab}-${project.id}`}
@@ -682,7 +657,6 @@ const ProjectsPage = () => {
                     </div>
                   ))}
                   
-                  {/* Desktop view - only current slide */}
                   <div className="hidden md:block w-full">
                     <motion.div
                       key={`${activeTab}-${currentIndex}`}
@@ -711,24 +685,24 @@ const ProjectsPage = () => {
                 </div>
               </div>
 
-              {/* Right Navigation Button - Hidden on Mobile */}
+              {/* Right Navigation Button */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleNext}
-                className="hidden md:block absolute -right-4 xl:-right-20 z-30 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-accent hover:border-accent transition-all duration-300 shadow-lg"
+                className="hidden md:block absolute -right-4 xl:-right-20 short:xl:-right-16 z-30 p-3 short:p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-accent hover:border-accent transition-all duration-300 shadow-lg"
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={24} className="short:w-5 short:h-5" />
               </motion.button>
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex gap-2 mt-6 md:mt-8">
+            <div className="flex gap-2 short:gap-1.5 mt-6 short:mt-4 md:mt-8 short:md:mt-6">
               {currentProjects.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`transition-all duration-300 rounded-full ${index === currentIndex ? 'w-8 md:w-10 h-2 md:h-2.5 bg-accent' : 'w-2 md:w-2.5 h-2 md:h-2.5 bg-white/30 hover:bg-white/50'}`}
+                  className={`transition-all duration-300 rounded-full ${index === currentIndex ? 'w-8 short:w-6 md:w-10 short:md:w-8 h-2 short:h-1.5 md:h-2.5 short:md:h-2 bg-accent' : 'w-2 short:w-1.5 md:w-2.5 short:md:w-2 h-2 short:h-1.5 md:h-2.5 short:md:h-2 bg-white/30 hover:bg-white/50'}`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
@@ -738,7 +712,6 @@ const ProjectsPage = () => {
       </div>
       <Bulb />
 
-      {/* Project Details Modal */}
       <ProjectModal
         project={selectedProject}
         isOpen={isModalOpen}
@@ -746,7 +719,6 @@ const ProjectsPage = () => {
         type={activeTab}
       />
 
-      {/* Custom CSS for hiding scrollbar */}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;

@@ -28,26 +28,19 @@ const fadeIn = (direction, delay) => {
       x: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
-        stiffness: 80,
-        damping: 20,
+        type: 'tween',
         duration: 1.2,
         delay: delay,
-        ease: [0.25, 0.46, 0.45, 0.94], // Smoother easing curve
+        ease: [0.25, 0.25, 0.25, 0.75],
       },
     },
     exit: {
-      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0, // Exit opposite direction
+      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
       opacity: 0,
-      scale: 0.95, // Slight scale for depth
       transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 25,
-        duration: 0.6, // Faster exit
-        ease: [0.43, 0.13, 0.23, 0.96], // Snappier exit easing
-        staggerChildren: 0.08, // Stagger multiple cards
-        staggerDirection: -1, // Reverse stagger (last card exits first)
+        type: 'tween',
+        duration: 1.2,
+        ease: [0.25, 0.25, 0.25, 0.75],
       },
     },
   };
@@ -68,7 +61,7 @@ const serviceData = [
   {
     icon: <RxGlobe />,
     title: "Landing Pages",
-    description: "High-converting, responsive landing pages designed to capture attention, drive engagement, and boost conversions with stunning visuals and optimized performance across all devices.",
+    description: "Responsive landing pages designed to capture attention, drive engagement, and boost conversions with stunning visuals and optimized performance across all devices.",
   },
   {
     icon: <RxCode />,
@@ -109,7 +102,7 @@ const ServiceSlider = () => {
       freeMode={true}
       pagination={{ clickable: true }}
       modules={[FreeMode, Pagination]}
-      className="h-[300px] sm:h-[440px]"
+      className="h-[300px] short:h-[280px] sm:h-[440px]"
       style={{
         '--swiper-pagination-bottom': '0px',
         '--swiper-pagination-color': '#f13024',
@@ -118,9 +111,9 @@ const ServiceSlider = () => {
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-[rgba(65,47,123,0.15)] h-[247px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
+          <div className="bg-[rgba(65,47,123,0.15)] h-[247px] short:h-[227px]  sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
             {/* icon */}
-            <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
+            <div className="text-3xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
 
             {/* title & description */}
             <div className="mb-3 sm:mb-4 flex-1">
@@ -163,11 +156,11 @@ const Services = () => {
           {/* Text */}
           <div className="text-center flex xl:w-[30vw] relative top-3 flex-col lg:text-left mb-8 xl:mb-0">
             <motion.h2
-              variants={fadeIn('left', 0.4)}
+              variants={fadeIn('left', 0.3)}
               initial="hidden"
               animate="show"
               exit="exit"
-              className="text-[27px] sm:text-4xl xl:text-5xl font-bold xl:mt-8 mb-3 sm:mb-4"
+              className="text-[27px] short:text-[25px] sm:text-4xl xl:text-5xl font-bold xl:mt-8 mb-3 sm:mb-4"
             >
               My <span className="text-accent">Services</span><span className="text-accent">.</span>
             </motion.h2>
@@ -176,23 +169,23 @@ const Services = () => {
               initial="hidden"
               animate="show"
               exit="exit"
-              className="text-[15px] sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
+              className="text-[15px] short:text-[13px] sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
             >
               Full-stack development services specializing in web and mobile applications, from sleek landing pages to scalable backends built with Python and Django.
             </motion.p>
           </div>
-<motion.div
-  variants={fadeIn('right', 0.4)}
-  initial="hidden"
-  animate="show"
-  exit="exit"
-  className="w-full xl:max-w-[65%] xl:pr-8"
-  style={{ overflow: 'visible' }} // Changed to visible to see cards animate out
->
-  {/* slider */}
-  <ServiceSlider />
-</motion.div>
-      
+
+          <motion.div
+            variants={fadeIn('right', 0.6)}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="w-full xl:max-w-[65%] xl:pr-8"
+            style={{ overflow: 'hidden' }}
+          >
+            {/* slider */}
+            <ServiceSlider />
+          </motion.div>
         </div>
       </div>
       <Bulb />
