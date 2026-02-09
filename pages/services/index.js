@@ -152,7 +152,7 @@ const Services = () => {
     <div className="min-h-screen bg-primary/30 py-24 sm:py-36 flex items-center">
       <Circles />
       <div className="container mx-auto px-4">
-        <div className="flex flex-col xl:flex-row gap-x-8 relative xshort:bottom-0 short:bottom-5">
+        <div className="flex flex-col xl:flex-row gap-x-8 relative  short:bottom-10">
           {/* Text */}
           <div className="text-center flex xl:w-[30vw] relative top-3 flex-col lg:text-left mb-8 xl:mb-0">
             <motion.h2
