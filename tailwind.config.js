@@ -20,6 +20,7 @@ module.exports = {
       lg: '960px',
       xl: '1200px',
       short: { raw: '(max-height: 709px) and (max-width: 768px)' },
+      xshort: { raw: '(max-height: 680px)' },
     },
     extend: {
       colors: {
