@@ -158,10 +158,10 @@ const About = () => {
   };
 
   return (
-    <div className="h-full bg-primary/30 py-12 sm:py-32 text-center xl:text-left">
+    <div className="h-full bg-primary/30 py-12 short:py-8 sm:py-32 text-center xl:text-left">
       <Circles />
 
-      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6 pt-24 sm:pt-0">
+      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6 pt-24 short:pt-16 sm:pt-0">
         {/* text */}
         <div className="flex-1 flex flex-col justify-center">
           <motion.h2
@@ -169,7 +169,7 @@ const About = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="h2 sm:text-[28px] text-[24px]"
+            className="h2 text-[24px] short:text-[20px] sm:text-[32px]"
           >
             Captivating <span className="text-accent">stories birth</span>
             <br />
@@ -180,7 +180,7 @@ const About = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="max-w-[500px] sm:text-[17px] text-[14px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0"
+            className="max-w-[500px] text-[13px] short:text-[12px] sm:text-[16px] mx-auto xl:mx-0 mb-6 short:mb-4 xl:mb-12 px-2 xl:px-0"
           >
             I build responsive interfaces with HTML, CSS, JavaScript, React,
             React Native, Next.js, and Tailwind CSS. On the backend, I develop scalable
@@ -194,35 +194,35 @@ const About = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="hidden md:flex md:max-w-xl xl:max-w-none mx-auto xl:mx-0 mb-8"
+            className="hidden md:flex md:max-w-xl xl:max-w-none mx-auto xl:mx-0 mb-8 short:mb-6"
           >
             <div className="flex flex-1 xl:gap-x-4">
               {/* experience */}
               <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
+                <div className="text-3xl short:text-2xl xl:text-4xl font-extrabold text-accent mb-2 short:mb-1">
                   <CountUp start={0} end={3} duration={5} /> +
                 </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
+                <div className="text-xs short:text-[10px] uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
                   Years of Experience
                 </div>
               </div>
 
               {/* clients */}
               <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
+                <div className="text-3xl short:text-2xl xl:text-4xl font-extrabold text-accent mb-2 short:mb-1">
                   <CountUp start={0} end={20} duration={5} /> +
                 </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
+                <div className="text-xs short:text-[10px] uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
                   Satisfied clients
                 </div>
               </div>
 
               {/* projects */}
               <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0 last:after:hidden">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
+                <div className="text-3xl short:text-2xl xl:text-4xl font-extrabold text-accent mb-2 short:mb-1">
                   <CountUp start={0} end={40} duration={5} /> +
                 </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
+                <div className="text-xs short:text-[10px] uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
                   Finished Projects
                 </div>
               </div>
@@ -236,16 +236,16 @@ const About = () => {
           initial="hidden"
           animate="show"
           exit="exit"
-          className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
+          className="flex flex-col w-full xl:max-w-[48%] h-[480px] short:h-[380px] sm:h-[480px]"
         >
-          <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4">
+          <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4 short:mb-3">
             {aboutData.map((item, itemIndex) => (
               <div
                 key={itemIndex}
                 className={`${
                   index === itemIndex &&
                   "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                } cursor-pointer capitalize xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
+                } cursor-pointer capitalize text-base short:text-sm xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
                 onClick={() => setIndex(itemIndex)}
               >
                 {item.title}
@@ -254,8 +254,8 @@ const About = () => {
           </div>
 
           <div className="py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center xl:items-start">
-            {/* Frontend/Backend Switch - Fixed with better structure */}
-            <div className="flex gap-x-3 mb-2 relative z-20">
+            {/* Frontend/Backend Switch */}
+            <div className="flex gap-x-3 short:gap-x-2 mb-2 short:mb-1 relative z-20">
               <button
                 type="button"
                 onClick={(e) => {
@@ -263,7 +263,7 @@ const About = () => {
                   e.stopPropagation();
                   handleTabChange(0);
                 }}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer select-none ${
+                className={`px-4 short:px-3 py-2 short:py-1.5 rounded-lg text-sm short:text-xs font-medium transition-all duration-300 cursor-pointer select-none ${
                   skillTab === 0
                     ? "bg-accent text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10"
@@ -278,7 +278,7 @@ const About = () => {
                   e.stopPropagation();
                   handleTabChange(1);
                 }}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer select-none ${
+                className={`px-4 short:px-3 py-2 short:py-1.5 rounded-lg text-sm short:text-xs font-medium transition-all duration-300 cursor-pointer select-none ${
                   skillTab === 1
                     ? "bg-accent text-white"
                     : "bg-white/5 text-white/60 hover:bg-white/10"
@@ -290,7 +290,7 @@ const About = () => {
 
             {/* Skills Display */}
             <div className="w-full relative z-10">
-              <div className="hidden sm:block font-light mb-3 text-white/80 text-sm">
+              <div className="hidden sm:block font-light mb-3 short:mb-2 text-white/80 text-sm short:text-xs">
                 {aboutData[index].info[skillTab].title}
               </div>
 
@@ -309,19 +309,19 @@ const About = () => {
                   onMouseDown={handleUserInteraction}
                   onWheel={handleUserInteraction}
                 >
-                  <div className="grid grid-flow-col auto-cols-[calc(25%-9px)] sm:grid-flow-row sm:grid-cols-4 gap-3 sm:gap-4 min-w-min sm:min-w-0">
+                  <div className="grid grid-flow-col auto-cols-[calc(25%-9px)] sm:grid-flow-row sm:grid-cols-4 gap-3 short:gap-2 sm:gap-4 min-w-min sm:min-w-0">
                     {aboutData[index].info[skillTab].icons?.map((iconData, iconIndex) => (
                       <motion.div
                         key={iconIndex}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: iconIndex * 0.05 }}
-                        className="flex flex-col items-center justify-center p-3 bg-white/5 hover:bg-accent/10 rounded-lg transition-all duration-300 hover:scale-105 border border-white/5 hover:border-accent/30 min-w-[70px] sm:min-w-0"
+                        className="flex flex-col items-center justify-center p-3 short:p-2 bg-white/5 hover:bg-accent/10 rounded-lg transition-all duration-300 hover:scale-105 border border-white/5 hover:border-accent/30 min-w-[70px] short:min-w-[60px] sm:min-w-0"
                       >
-                        <div className="text-2xl sm:text-3xl text-white hover:text-accent transition-colors duration-300 mb-1">
+                        <div className="text-2xl short:text-xl sm:text-3xl text-white hover:text-accent transition-colors duration-300 mb-1 short:mb-0.5">
                           {iconData.icon}
                         </div>
-                        <span className="text-[9px] sm:text-[10px] text-white/60 text-center font-medium whitespace-nowrap">
+                        <span className="text-[9px] short:text-[8px] sm:text-[10px] text-white/60 text-center font-medium whitespace-nowrap">
                           {iconData.name}
                         </span>
                       </motion.div>
@@ -331,8 +331,8 @@ const About = () => {
 
                 {/* Scroll Hint (visible only on mobile) */}
                 {isAutoScrolling && (
-                  <div className="sm:hidden text-center mt-2">
-                    <span className="text-[10px] text-white/40 animate-pulse">
+                  <div className="sm:hidden text-center mt-2 short:mt-1">
+                    <span className="text-[10px] short:text-[9px] text-white/40 animate-pulse">
                       Touch to pause auto-scroll
                     </span>
                   </div>
