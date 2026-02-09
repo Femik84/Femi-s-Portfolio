@@ -28,19 +28,26 @@ const fadeIn = (direction, delay) => {
       x: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
+        type: 'spring',
+        stiffness: 80,
+        damping: 20,
         duration: 1.2,
         delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        ease: [0.25, 0.46, 0.45, 0.94], // Smoother easing curve
       },
     },
     exit: {
-      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0, // Exit opposite direction
       opacity: 0,
+      scale: 0.95, // Slight scale for depth
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type: 'spring',
+        stiffness: 100,
+        damping: 25,
+        duration: 0.6, // Faster exit
+        ease: [0.43, 0.13, 0.23, 0.96], // Snappier exit easing
+        staggerChildren: 0.08, // Stagger multiple cards
+        staggerDirection: -1, // Reverse stagger (last card exits first)
       },
     },
   };
@@ -156,7 +163,7 @@ const Services = () => {
           {/* Text */}
           <div className="text-center flex xl:w-[30vw] relative top-3 flex-col lg:text-left mb-8 xl:mb-0">
             <motion.h2
-              variants={fadeIn('left', 0.3)}
+              variants={fadeIn('left', 0.4)}
               initial="hidden"
               animate="show"
               exit="exit"
@@ -174,18 +181,18 @@ const Services = () => {
               Full-stack development services specializing in web and mobile applications, from sleek landing pages to scalable backends built with Python and Django.
             </motion.p>
           </div>
-
-          <motion.div
-            variants={fadeIn('right', 0.6)}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className="w-full xl:max-w-[65%] xl:pr-8"
-            style={{ overflow: 'hidden' }}
-          >
-            {/* slider */}
-            <ServiceSlider />
-          </motion.div>
+<motion.div
+  variants={fadeIn('right', 0.4)}
+  initial="hidden"
+  animate="show"
+  exit="exit"
+  className="w-full xl:max-w-[65%] xl:pr-8"
+  style={{ overflow: 'visible' }} // Changed to visible to see cards animate out
+>
+  {/* slider */}
+  <ServiceSlider />
+</motion.div>
+      
         </div>
       </div>
       <Bulb />
