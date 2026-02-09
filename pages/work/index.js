@@ -548,7 +548,7 @@ const ProjectsPage = () => {
       <div className="container mx-auto relative xshort:bottom-0 short:bottom-8 z-20 px-4 short:px-3">
         <div className="flex flex-col xl:flex-row gap-x-8 short:gap-x-6">
           {/* Text Section */}
-          <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 short:mb-4 md:mb-8 short:md:mb-6 xl:bottom-10 short:xl:bottom-8">
+          <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 short:mb-4 md:mb-8 short:md:mb-6 xl:bottom-9 short:xl:bottom-8">
             <motion.h2
               variants={fadeIn("right", 0.3)}
               initial="hidden"
