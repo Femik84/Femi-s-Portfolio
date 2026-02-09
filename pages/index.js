@@ -94,7 +94,7 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="h1 xl:text-[40px]"
+            className="h1 text-[30px] xl:text-[40px]"
           >
             Transforming Ideas <br /> Into{" "}
             <span className="text-accent">Digital Reality</span>
