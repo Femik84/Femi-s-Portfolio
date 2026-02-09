@@ -545,7 +545,7 @@ const ProjectsPage = () => {
   return (
     <div className="min-h-screen bg-primary/30 md:pt-36 short:md:pt-28 pb-8 short:pb-6 md:pb-12 short:md:pb-10 flex items-center relative overflow-hidden">
       <Circles />
-      <div className="container mx-auto relative short:bottom-11 z-20 px-4 short:px-3">
+      <div className="container mx-auto relative xshort:bottom-0 short:bottom-9 z-20 px-4 short:px-3">
         <div className="flex flex-col xl:flex-row gap-x-8 short:gap-x-6">
           {/* Text Section */}
           <div className="text-center relative flex xl:w-[30vw] flex-col lg:text-left mb-6 short:mb-4 md:mb-8 short:md:mb-6 xl:bottom-10 short:xl:bottom-8">
