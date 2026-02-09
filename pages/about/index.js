@@ -161,7 +161,7 @@ const About = () => {
     <div className="h-full bg-primary/30 py-12 short:py-8 sm:py-32 text-center xl:text-left">
       <Circles />
 
-      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6 pt-24 short:pt-16 sm:pt-0">
+      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6 pt-[105px] short:pt-28 sm:pt-0">
         {/* text */}
         <div className="flex-1 flex flex-col justify-center">
           <motion.h2

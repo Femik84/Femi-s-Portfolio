@@ -11,7 +11,7 @@ const ProjectsBtn2 = () => {
     <div className="mx-auto xl:mx-0">
       <Link
         href="/work"
-        className="relative w-[185px] bottom-4 h-[185px] flex justify-center items-center z-10 pointer-events-auto"
+        className="relative w-[185px] short:w-[110px] short:h-[110px] bottom-4 short:bottom-0 h-[185px] flex justify-center items-center z-10 pointer-events-auto"
       >
         <Image
           src="/rounded-text.png"

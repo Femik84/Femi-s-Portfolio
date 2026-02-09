@@ -94,24 +94,25 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="h1 text-[30px] xl:text-[40px]"
+            className="h1 text-[30px] short:text-[28px] xl:text-[40px]"
           >
             Transforming Ideas <br /> Into{" "}
             <span className="text-accent">Digital Reality</span>
           </motion.h1>
 
           {/* subtitle */}
-          <motion.p
-            variants={subtitleVariants}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
-          >
-            I&apos;m a passionate full-stack developer who builds dynamic web
-            apps and mobile apps from start to finish, turning ideas into
-            seamless digital experiences.
-          </motion.p>
+         <motion.p
+  variants={subtitleVariants}
+  initial="hidden"
+  animate="show"
+  exit="exit"
+  className="text-[16px] short:text-[14px] xl:text-[20px] max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
+>
+  I&apos;m a passionate full-stack developer who builds dynamic web
+  apps and mobile apps from start to finish, turning ideas into
+  seamless digital experiences.
+</motion.p>
+
 
           {/* buttons */}
           <motion.div

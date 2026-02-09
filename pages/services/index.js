@@ -66,7 +66,7 @@ const serviceData = [
   {
     icon: <RxCode />,
     title: "Backend Development",
-    description: "Secure, scalable APIs and server-side solutions using Python and Django, optimized for speed, reliability, and handling complex business logic with enterprise-grade architecture.",
+    description: "Secure, scalable APIs and server-side solutions using Python and Django, optimized for speed and handling complex business logic with enterprise-grade architecture.",
   },
   {
     icon: <RxDashboard />,
@@ -102,7 +102,7 @@ const ServiceSlider = () => {
       freeMode={true}
       pagination={{ clickable: true }}
       modules={[FreeMode, Pagination]}
-      className="h-[310px] sm:h-[440px]"
+      className="h-[300px] sm:h-[440px]"
       style={{
         '--swiper-pagination-bottom': '0px',
         '--swiper-pagination-color': '#f13024',
@@ -111,14 +111,14 @@ const ServiceSlider = () => {
     >
       {serviceData.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-[rgba(65,47,123,0.15)] h-[257px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
+          <div className="bg-[rgba(65,47,123,0.15)] h-[247px] sm:h-[380px] rounded-lg px-5 py-6 sm:px-6 sm:py-8 flex sm:flex-col gap-x-4 sm:gap-x-0 group cursor-pointer hover:bg-[rgba(89,65,169,0.15)] transition-all duration-300 border border-white/5 hover:border-white/10">
             {/* icon */}
             <div className="text-4xl sm:text-4xl text-accent mb-3 sm:mb-4 shrink-0">{item.icon}</div>
 
             {/* title & description */}
             <div className="mb-3 sm:mb-4 flex-1">
-              <h3 className="text-lg sm:text-lg mb-1.5 sm:mb-2 font-semibold">{item.title}</h3>
-              <p className="text-sm sm:text-sm leading-relaxed text-white/80">{item.description}</p>
+              <h3 className="text-[17px] sm:text-lg mb-1.5 sm:mb-2 font-semibold">{item.title}</h3>
+              <p className="text-[13px] sm:text-sm leading-relaxed text-white/80">{item.description}</p>
             </div>
 
             {/* arrow */}
@@ -160,7 +160,7 @@ const Services = () => {
               initial="hidden"
               animate="show"
               exit="exit"
-              className="text-3xl sm:text-4xl xl:text-5xl font-bold xl:mt-8 mb-3 sm:mb-4"
+              className="text-[27px] sm:text-4xl xl:text-5xl font-bold xl:mt-8 mb-3 sm:mb-4"
             >
               My <span className="text-accent">Services</span><span className="text-accent">.</span>
             </motion.h2>
@@ -169,7 +169,7 @@ const Services = () => {
               initial="hidden"
               animate="show"
               exit="exit"
-              className="text-base sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
+              className="text-[15px] sm:text-base mb-4 max-w-[400px] mx-auto lg:mx-0 text-white/90 leading-relaxed"
             >
               Full-stack development services specializing in web and mobile applications, from sleek landing pages to scalable backends built with Python and Django.
             </motion.p>
